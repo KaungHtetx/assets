@@ -1,0 +1,862 @@
+{
+	"0": {
+		"amount": "TransAmount",
+		"desc": "Block money",
+		"debit": {
+			"type": "productLevel",
+			"rule": "606e774b57c4063beb589901",
+			"target": "sender"
+		},
+		"credit": {
+			"type": "glLevel",
+			"rule": "manual",
+			"target": "L100000217"
+		},
+		"isMultiComponents": false,
+		"componentType": ""
+	},
+	"1": {
+		"amount": "TransOrigAmount",
+		"desc": "Release e-money",
+		"debit": {
+			"type": "glLevel",
+			"rule": "manual",
+			"target": "L100000217"
+		},
+		"": {
+			"createdAt": "2025-08-30T11:00:39.145Z",
+			"updatedAt": "2025-08-30T11:17:40.535Z",
+			"id": "68b2d9d775ee93d4d06c3211",
+			"code": "OPERATORCASHOUTTOCORPORATEAGENT",
+			"name": "Corporate Agent Cash out by Operator",
+			"fullName": "Operator Make Cash-out for Agent",
+			"desc": "d",
+			"channels": [
+				"web"
+			],
+			"related": [
+				"officer",
+				"agent"
+			],
+			"action": "",
+			"transType": "normal",
+			"isRefund": false,
+			"billerService": "none",
+			"actionParams": {},
+			"status": 1,
+			"lockedBy": {},
+			"activatedBy": {},
+			"statusChangedAt": null,
+			"createdBy": {
+				"id": "65f7c9f93cf4497b62cabab5",
+				"name": "Kaung Htet Min",
+				"roles": [
+					"root",
+					"dmin",
+					"operationanager",
+					"perationupervisor",
+					"roductwner",
+					"shweopeartion"
+				]
+			},
+			"updatedBy": {
+				"id": "65f7c9f93cf4497b62cabab5",
+				"name": "Kaung Htet Min",
+				"roles": [
+					"root",
+					"dmin",
+					"operationanager",
+					"perationupervisor",
+					"roductwner",
+					"shweopeartion"
+				]
+			},
+			"note": "Operator Make Cash-out for Corporate Agent",
+			"devGrp": 0,
+			"serviceToRefund": "",
+			"inputFields": {},
+			"outputFields": {},
+			"paymentResult": {},
+			"paymentPreview": {},
+			"paymentShortResult": {},
+			"serviceTarget": "60ed0fca171462bd7e2db807",
+			"actionPriority": "before",
+			"fieldBuilder": [
+				{
+					"order": 1,
+					"name": "SERVICEID",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "SERVICEID",
+					"source": "parameters"
+				},
+				{
+					"order": 2,
+					"name": "AMOUNT",
+					"rule": "mapping",
+					"datatype": "float",
+					"variable": "AMOUNT",
+					"source": "parameters"
+				},
+				{
+					"order": 3,
+					"name": "SENDERPHONE",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "SENDERPHONE",
+					"source": "parameters"
+				},
+				{
+					"order": 4,
+					"name": "SENDERCLIENT",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "SENDERCLIENT",
+					"source": "parameters"
+				},
+				{
+					"order": 5,
+					"name": "DEVICEID",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "DEVICEID",
+					"source": "parameters"
+				},
+				{
+					"order": 6,
+					"name": "CURRENCY",
+					"rule": "fixed",
+					"datatype": "string",
+					"variable": "",
+					"source": "MMK"
+				},
+				{
+					"order": 7,
+					"name": "MESSAGE",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "MESSAGE",
+					"source": "parameters"
+				},
+				{
+					"order": 8,
+					"name": "MessageType",
+					"rule": "fixed",
+					"datatype": "string",
+					"source": "FO"
+				},
+				{
+					"order": 9,
+					"name": "CLIENT",
+					"rule": "fixed",
+					"datatype": "string",
+					"variable": "",
+					"source": "officer",
+					"isReplaceIfExisted": true
+				},
+				{
+					"order": 10,
+					"name": "USERID",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "id",
+					"source": "user",
+					"isReplaceIfExisted": true
+				},
+				{
+					"order": 11,
+					"name": "SENDERID",
+					"rule": "query",
+					"datatype": "string",
+					"variable": "id",
+					"source": "senderPocket",
+					"query": "queryPocketByPhone(SENDERPHONE,SENDERCLIENT,CURRENCY)"
+				},
+				{
+					"order": 12,
+					"name": "SENDERUSERID",
+					"rule": "mapping",
+					"datatype": "string",
+					"variable": "user",
+					"source": "senderPocket",
+					"query": "",
+					"isReplaceIfExisted": true
+				}
+			],
+			"actionResult": [],
+			"webResult": {},
+			"typeResult": "none",
+			"category": "B2P",
+			"amountFormula": {
+				"senderAmount": "TOTALAMOUNT",
+				"receiverAmount": "AMOUNT"
+			},
+			"icon": null,
+			"historyResult": [],
+			"definition": {
+				"createdAt": "2025-08-30T11:04:05.236Z",
+				"updatedAt": "2025-08-30T11:04:05.236Z",
+				"id": "68b2daa575ee9374d66c321f",
+				"code": "68b2d9d775ee93d4d06c3211",
+				"name": "Corporate Agent Cash out by Operator",
+				"desc": "",
+				"glSteps": [
+					{
+						"amount": "TransAmount",
+						"desc": "Block money",
+						"debit": {
+							"type": "productLevel",
+							"rule": "606e774b57c4063beb589901",
+							"target": "sender"
+						},
+						"credit": {
+							"type": "glLevel",
+							"rule": "manual",
+							"target": "L100000217"
+						},
+						"isMultiComponents": false,
+						"componentType": ""
+					},
+					{
+						"amount": "TransOrigAmount",
+						"desc": "Release e-money",
+						"debit": {
+							"type": "glLevel",
+							"rule": "manual",
+							"target": "L100000217"
+						},
+						"credit": {
+							"type": "glLevel",
+							"rule": "manual",
+							"target": "A100000201"
+						},
+						"isMultiComponents": false,
+						"componentType": ""
+					}
+				],
+				"createdBy": {
+					"id": "65f7c9f93cf4497b62cabab5",
+					"name": "Kaung Htet Min",
+					"roles": [
+						"root",
+						"dmin",
+						"operationanager",
+						"perationupervisor",
+						"roductwner",
+						"shweopeartion"
+					]
+				},
+				"updatedBy": null
+			},
+			"validation": [
+				{
+					"id": "68b2dab575ee9307206c3222",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateSenderIsUser",
+					"validateFields": "SENDERPHONE:SENDERCLIENT:USERID",
+					"order": 1,
+					"status": 0,
+					"errorCode": 9051,
+					"errorMsg": "Sender is invalid"
+				},
+				{
+					"id": "68b2dab575ee930da76c3223",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateServiceInOffer",
+					"validateFields": "OFFERID:SERVICEID",
+					"order": 2,
+					"status": 1,
+					"errorCode": 9053,
+					"errorMsg": "Can not access to service"
+				},
+				{
+					"id": "68b2dab575ee9301206c3224",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateCurrency",
+					"validateFields": "CURRENCY",
+					"order": 3,
+					"status": 1,
+					"errorCode": 9079,
+					"errorMsg": "Currency is not valid"
+				},
+				{
+					"id": "68b2dab575ee9322666c3225",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateSenderPocketBalance",
+					"validateFields": "SENDERID",
+					"order": 4,
+					"status": 1,
+					"errorCode": 9057,
+					"errorMsg": "Sender Pocket balance error"
+				},
+				{
+					"id": "68b2dab575ee9317a96c3226",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateTransactionMaxAmount",
+					"validateFields": "OFFERID:SERVICEID:AMOUNT:CURRENCY",
+					"order": 5,
+					"status": 0,
+					"errorCode": 9060,
+					"errorMsg": "Amount too big"
+				},
+				{
+					"id": "68b2dab575ee93206e6c3227",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateTransactionMinAmount",
+					"validateFields": "OFFERID:SERVICEID:AMOUNT:CURRENCY",
+					"order": 6,
+					"status": 1,
+					"errorCode": 9059,
+					"errorMsg": "Amount too small"
+				},
+				{
+					"id": "68b2dab575ee934eb06c3228",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"validateFunc": "validateSenderAccountSufficiency",
+					"validateFields": "SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:CURRENCY",
+					"order": 7,
+					"status": 1,
+					"errorCode": 9061,
+					"errorMsg": "Sender balance not sufficiency"
+				}
+			],
+			"field": [
+				{
+					"id": "68b2dac475ee938c236c3230",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "DEVICEID",
+					"order": 2,
+					"fieldFormat": "string",
+					"minLength": 1,
+					"maxLength": 256,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9017,
+					"errorMsg": "Wrong DeviceId format"
+				},
+				{
+					"id": "68b2dac475ee93832e6c322e",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "OFFERID",
+					"order": 1,
+					"fieldFormat": "string",
+					"minLength": 24,
+					"maxLength": 24,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9002,
+					"errorMsg": "Wrong Offer Id format"
+				},
+				{
+					"id": "68b2dac475ee936f956c322f",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "SENDERUSRID",
+					"order": 7,
+					"fieldFormat": "string",
+					"minLength": 24,
+					"maxLength": 24,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": false,
+					"status": 1,
+					"errorCode": null,
+					"errorMsg": ""
+				},
+				{
+					"id": "68b2dac475ee936b0c6c322b",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "CURRENCY",
+					"order": 3,
+					"fieldFormat": "string",
+					"minLength": 3,
+					"maxLength": 3,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9012,
+					"errorMsg": "Wrong Currency format"
+				},
+				{
+					"id": "68b2dac475ee934efc6c3233",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "SENDERPHONE",
+					"order": 8,
+					"fieldFormat": "string",
+					"minLength": 9,
+					"maxLength": 11,
+					"regex": "^(09)([0-9]{7,9})$",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9004,
+					"errorMsg": "Wrong Sender Phone format"
+				},
+				{
+					"id": "68b2dac475ee934c9b6c322d",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "SENDERCLIENT",
+					"order": 4,
+					"fieldFormat": "string",
+					"minLength": 3,
+					"maxLength": 10,
+					"regex": "^(customer|agent|merchant|officer|biller)$",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9005,
+					"errorMsg": "Wrong Sender Client format"
+				},
+				{
+					"id": "68b2dac475ee934a7a6c3232",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "SERVICEID",
+					"order": 5,
+					"fieldFormat": "string",
+					"minLength": 24,
+					"maxLength": 24,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9022,
+					"errorMsg": "Wrong Service Id Format"
+				},
+				{
+					"id": "68b2dac475ee9337e16c322c",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "SENDERID",
+					"order": 10,
+					"fieldFormat": "string",
+					"minLength": 24,
+					"maxLength": 24,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9002,
+					"errorMsg": "Wrong SenderId format"
+				},
+				{
+					"id": "68b2dac475ee931cd26c3234",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "AMOUNT",
+					"order": 6,
+					"fieldFormat": "float",
+					"minLength": 1,
+					"maxLength": 20,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": true,
+					"status": 1,
+					"errorCode": 9011,
+					"errorMsg": "Wrong Amount format"
+				},
+				{
+					"id": "68b2dac475ee9303c06c3231",
+					"service": "68b2d9d775ee93d4d06c3211",
+					"fieldName": "MESSAGE",
+					"order": 9,
+					"fieldFormat": "string",
+					"minLength": 1,
+					"maxLength": 100,
+					"regex": "",
+					"needSecured": false,
+					"isRequired": false,
+					"status": 1,
+					"errorCode": null,
+					"errorMsg": ""
+				}
+			],
+			"currentVersion": {
+				"createdAt": "2025-08-30T11:00:39.145Z",
+				"updatedAt": "2025-08-30T11:04:43.728Z",
+				"id": "68b2d9d775ee9331e16c3213",
+				"service": "68b2d9d775ee93d4d06c3211",
+				"version": 1,
+				"transDefinition": [
+					{
+						"amount": "TransAmount",
+						"desc": "Block money",
+						"debit": {
+							"type": "productLevel",
+							"rule": "606e774b57c4063beb589901",
+							"target": "sender"
+						},
+						"credit": {
+							"type": "glLevel",
+							"rule": "manual",
+							"target": "L100000217"
+						},
+						"isMultiComponents": false,
+						"componentType": ""
+					},
+					{
+						"amount": "TransOrigAmount",
+						"desc": "Release e-money",
+						"debit": {
+							"type": "glLevel",
+							"rule": "manual",
+							"target": "L100000217"
+						},
+						"credit": {
+							"type": "glLevel",
+							"rule": "manual",
+							"target": "A100000201"
+						},
+						"isMultiComponents": false,
+						"componentType": ""
+					}
+				],
+				"transField": [
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "CURRENCY",
+						"fieldFormat": "string",
+						"minLength": 3,
+						"maxLength": 3,
+						"regex": "",
+						"status": 1,
+						"errorCode": 9012,
+						"errorMsg": "Wrong Currency format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 3
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "SENDERID",
+						"fieldFormat": "string",
+						"minLength": 24,
+						"maxLength": 24,
+						"regex": "",
+						"status": 1,
+						"errorCode": 9002,
+						"errorMsg": "Wrong SenderId format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 10
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "SENDERCLIENT",
+						"fieldFormat": "string",
+						"minLength": 3,
+						"maxLength": 10,
+						"regex": "^(customer|agent|merchant|officer|biller)$",
+						"status": 1,
+						"errorCode": 9005,
+						"errorMsg": "Wrong Sender Client format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 4
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "OFFERID",
+						"fieldFormat": "string",
+						"minLength": 24,
+						"maxLength": 24,
+						"regex": "",
+						"status": 1,
+						"errorCode": 9002,
+						"errorMsg": "Wrong Offer Id format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 1
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "SENDERUSRID",
+						"fieldFormat": "string",
+						"minLength": 24,
+						"maxLength": 24,
+						"regex": "",
+						"status": 1,
+						"errorCode": null,
+						"errorMsg": "",
+						"isRequired": 0,
+						"needSecured": false,
+						"order": 7
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "DEVICEID",
+						"fieldFormat": "string",
+						"minLength": 1,
+						"maxLength": 256,
+						"regex": "",
+						"status": 1,
+						"errorCode": 9017,
+						"errorMsg": "Wrong DeviceId format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 2
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "MESSAGE",
+						"fieldFormat": "string",
+						"minLength": 1,
+						"maxLength": 100,
+						"regex": "",
+						"status": 1,
+						"errorCode": null,
+						"errorMsg": "",
+						"isRequired": 0,
+						"needSecured": false,
+						"order": 9
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "SERVICEID",
+						"fieldFormat": "string",
+						"minLength": 24,
+						"maxLength": 24,
+						"regex": "",
+						"status": 1,
+						"errorCode": 9022,
+						"errorMsg": "Wrong Service Id Format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 5
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "SENDERPHONE",
+						"fieldFormat": "string",
+						"minLength": 9,
+						"maxLength": 11,
+						"regex": "^(09)([0-9]{7,9})$",
+						"status": 1,
+						"errorCode": 9004,
+						"errorMsg": "Wrong Sender Phone format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 8
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"fieldName": "AMOUNT",
+						"fieldFormat": "float",
+						"minLength": 1,
+						"maxLength": 20,
+						"regex": "",
+						"status": 1,
+						"errorCode": 9011,
+						"errorMsg": "Wrong Amount format",
+						"isRequired": true,
+						"needSecured": false,
+						"order": 6
+					}
+				],
+				"transValidation": [
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 1,
+						"validateFunc": "validateSenderIsUser",
+						"validateFields": "SENDERPHONE:SENDERCLIENT:USERID",
+						"errorCode": 9051,
+						"errorMsg": "Sender is invalid",
+						"status": 0
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 2,
+						"validateFunc": "validateServiceInOffer",
+						"validateFields": "OFFERID:SERVICEID",
+						"errorCode": 9053,
+						"errorMsg": "Can not access to service",
+						"status": 1
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 3,
+						"validateFunc": "validateCurrency",
+						"validateFields": "CURRENCY",
+						"errorCode": 9079,
+						"errorMsg": "Currency is not valid",
+						"status": 1
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 4,
+						"validateFunc": "validateSenderPocketBalance",
+						"validateFields": "SENDERID",
+						"errorCode": 9057,
+						"errorMsg": "Sender Pocket balance error",
+						"status": 1
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 5,
+						"validateFunc": "validateTransactionMaxAmount",
+						"validateFields": "OFFERID:SERVICEID:AMOUNT:CURRENCY",
+						"errorCode": 9060,
+						"errorMsg": "Amount too big",
+						"status": 0
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 6,
+						"validateFunc": "validateTransactionMinAmount",
+						"validateFields": "OFFERID:SERVICEID:AMOUNT:CURRENCY",
+						"errorCode": 9059,
+						"errorMsg": "Amount too small",
+						"status": 1
+					},
+					{
+						"service": "68b2d9d775ee93d4d06c3211",
+						"order": 7,
+						"validateFunc": "validateSenderAccountSufficiency",
+						"validateFields": "SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:CURRENCY",
+						"errorCode": 9061,
+						"errorMsg": "Sender balance not sufficiency",
+						"status": 1
+					}
+				],
+				"desc": "",
+				"isUsing": true,
+				"status": "active",
+				"fieldBuilder": [
+					{
+						"order": 1,
+						"name": "SERVICEID",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "SERVICEID",
+						"source": "parameters"
+					},
+					{
+						"order": 2,
+						"name": "AMOUNT",
+						"rule": "mapping",
+						"datatype": "float",
+						"variable": "AMOUNT",
+						"source": "parameters"
+					},
+					{
+						"order": 3,
+						"name": "SENDERPHONE",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "SENDERPHONE",
+						"source": "parameters"
+					},
+					{
+						"order": 4,
+						"name": "SENDERCLIENT",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "SENDERCLIENT",
+						"source": "parameters"
+					},
+					{
+						"order": 5,
+						"name": "DEVICEID",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "DEVICEID",
+						"source": "parameters"
+					},
+					{
+						"order": 6,
+						"name": "CURRENCY",
+						"rule": "fixed",
+						"datatype": "string",
+						"variable": "",
+						"source": "MMK"
+					},
+					{
+						"order": 7,
+						"name": "MESSAGE",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "MESSAGE",
+						"source": "parameters"
+					},
+					{
+						"order": 8,
+						"name": "MessageType",
+						"rule": "fixed",
+						"datatype": "string",
+						"source": "FO"
+					},
+					{
+						"order": 9,
+						"name": "CLIENT",
+						"rule": "fixed",
+						"datatype": "string",
+						"variable": "",
+						"source": "officer",
+						"isReplaceIfExisted": true
+					},
+					{
+						"order": 10,
+						"name": "USERID",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "id",
+						"source": "user",
+						"isReplaceIfExisted": true
+					},
+					{
+						"order": 11,
+						"name": "SENDERID",
+						"rule": "query",
+						"datatype": "string",
+						"variable": "id",
+						"source": "senderPocket",
+						"query": "queryPocketByPhone(SENDERPHONE,SENDERCLIENT,CURRENCY)"
+					},
+					{
+						"order": 12,
+						"name": "SENDERUSERID",
+						"rule": "mapping",
+						"datatype": "string",
+						"variable": "user",
+						"source": "senderPocket",
+						"query": "",
+						"isReplaceIfExisted": true
+					}
+				],
+				"actionResult": [],
+				"createdBy": {
+					"id": "65f7c9f93cf4497b62cabab5",
+					"name": "Kaung Htet Min",
+					"roles": [
+						"root",
+						"dmin",
+						"operationanager",
+						"perationupervisor",
+						"roductwner",
+						"shweopeartion"
+					]
+				},
+				"updatedBy": {
+					"id": "65f7c9f93cf4497b62cabab5",
+					"name": "Kaung Htet Min",
+					"roles": [
+						"root",
+						"dmin",
+						"operationanager",
+						"perationupervisor",
+						"roductwner",
+						"shweopeartion"
+					]
+				}
+			}
+		},
+		"credit": {
+			"type": "glLevel",
+			"rule": "manual",
+			"target": "A100000201"
+		},
+		"isMultiComponents": false,
+		"componentType": ""
+	}
+}
