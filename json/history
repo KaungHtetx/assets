@@ -1,0 +1,26 @@
+{
+  "myanmarPayMMQR": {
+    "endToEndID": "68b3211375ee9306fd6c3370",
+    "transactionCode": "241914875030",
+    "transactionDate": "30/08/2025 22:34",
+    "sender": {
+      "name": "KHMU",
+      "phoneNumber": "943023455"
+    },
+    "merchant": {
+      "name": "G-1 Merchant",
+      "pan": "777801XXXXXXXXX"
+    },
+    "amount": {
+      "transactionAmount": "1,231.00 MMK",
+      "fee": "300.00 MMK",
+      "discount": "0.00 MMK",
+      "total": "1,531.00 MMK"
+    },
+    "billNumber": "20256890100",
+    "referenceID": "46777102",
+    "purpose": "QR PAY ΟΙ 26",
+    "status": "Failed",
+    "mmqrReason": "Time out from RI"
+  }
+}
