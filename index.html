@@ -3,151 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transaction Detail</title>
+  <title>MMQR Card</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #e6f9e8;
-      margin: 0;
-      padding: 20px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f7f7f7;
+      margin: 0;
+      font-family: Arial;
     }
-    .container {
-      width: 100%;
-      max-width: 400px;
+
+    .card {
+      position: relative;
+      width: 330px;
+      height: 478px;
       background: #fff;
-      border-radius: 20px;
+      border: 1px solid #ddd;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      overflow: hidden;
-    }
-    .header {
-      background: #22aa44;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .logo {
-      text-align: center;
-      margin: 15px 0;
-    }
-    .logo img {
-      height: 60px;
-    }
-    .title {
-      text-align: center;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #22aa44;
-    }
-    .info {
-      padding: 15px;
-    }
-    .row {
       display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #eee;
-      padding: 6px 0;
-      font-size: 14px;
+      flex-direction: column;
+      align-items: center;
     }
-    .label {
-      font-weight: bold;
+
+    /* Header with logo + yellow line */
+    .header {
+      margin-top:5px;
+      width: 100%;
+      height: 18.5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
-    .buttons {
+
+    .header::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 8%;
+      background: #f2b600;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .logo {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+    }
+
+    /* Content */
+    .main-content {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    /* Inner container same width as QR */
+    .info-container {
+      width: 65%; /* same width as QR */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .receiver {
+      font-size: 20px;
+      font-weight:;
+      margin-bottom: 2px;
+    }
+
+    .amount-row {
+      display: flex;
+      align-items: baseline;
+    }
+
+    .amount {
+      font-size: 30px;
+      font-weight: ;
+      
+    }
+
+    .currency {
+      font-size: 20px;
+      margin-left: 5px;
+    }
+
+    /* Yellow dotted line full width */
+    .dotted-line {
+      margin: 1px 0;
+      width: 100%;
+      border-bottom: 2px dotted #f2b600;
+    }
+
+    /* MMQR label before QR */
+    .mmqr {
+      margin-top: 2px;
+      margin-bottom:2px;
+      font-size: 20px;
+      font-weight: semibold;
       text-align: center;
-      margin-bottom: 15px;
     }
-    .buttons button {
-      margin: 5px;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #22aa44;
-      color: white;
-      font-weight: bold;
+
+    /* QR Code centered */
+    .qr {
+      width: 65%;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .buttons button.inactive {
-      background: #ccc;
-      color: #333;
+
+    .qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Footer line */
+    .footer {
+      margin-top: auto;
+      width: 100%;
+      height: 2%;
+      background: #002c6f;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <div class="header">Transaction Detail</div>
-    
-    <div class="buttons">
-      <button id="btnPayment">Payment</button>
-      <button id="btnRefund" class="inactive">Refund</button>
+  <div class="card">
+    <!-- Header -->
+    <div class="header">
+      <img class="logo" src="https://raw.githubusercontent.com/KaungHtetx/assets/refs/heads/main/IMG_20250923_050326.png" alt="MyanmarPay Logo">
     </div>
 
-    <div id="paymentScreen">
-      <div class="logo">
-        <img src="https://digitalwallet-poc-storage-s3.s3-ap-southeast-1.amazonaws.com/Uploads/officer/dfbdd98c-e775-4790-b21b-640d2f906c59.png" alt="Logo">
+    <!-- Content -->
+    <div class="main-content">
+      <!-- Inner container -->
+      <div class="info-container">
+        <div class="receiver" id="merchantName">MoMoney Merchant</div>
+        <div class="amount-row">
+          <div class="amount" id="amount">150,000.00</div>
+          <div class="currency">MMK</div>
+        </div>
       </div>
-      <div class="title">Transaction Detail</div>
-      <div class="info">
-        <div class="row"><span class="label">End to End ID</span><span>PP20251757317124009</span></div>
-        <div class="row"><span class="label">Transaction Code</span><span>242662125200</span></div>
-        <div class="row"><span class="label">ClrSysRef</span><span>0123456090814084367</span></div>
-        <div class="row"><span class="label">Transaction Name</span><span>Payment MMQR Merchant</span></div>
-        <div class="row"><span class="label">Transaction Date</span><span>08/09/2025 14:08</span></div>
-        <div class="row"><span class="label">Transaction Status</span><span>Success</span></div>
-        <div class="row"><span class="label">From (Customer Name)</span><span>Nyi Chay</span></div>
-        <div class="row"><span class="label">To (Merchant Name)</span><span>Aung Chan Thar</span></div>
-        <div class="row"><span class="label">Merchant PAN</span><span>620601xxxxxxxx</span></div>
-        <div class="row"><span class="label">Amount</span><span>5,232.67 MMK</span></div>
-        <div class="row"><span class="label">Discount</span><span>0.00 MMK</span></div>
-        <div class="row"><span class="label">Fee</span><span>26.16 MMK</span></div>
-        <div class="row"><span class="label">Total</span><span>5,232.67 MMK</span></div>
-        <div class="row"><span class="label">Remark</span><span>Test Payment RI</span></div>
+
+      <!-- Yellow dotted line -->
+      <div class="dotted-line"></div>
+
+      <!-- MMQR label -->
+      <div class="mmqr">MMQR</div>
+
+      <!-- QR -->
+      <div class="qr">
+        <img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=MoMerchant|150000" alt="QR Code">
       </div>
     </div>
 
-    <div id="refundScreen" style="display:none;">
-      <div class="logo">
-        <img src="https://digitalwallet-poc-storage-s3.s3-ap-southeast-1.amazonaws.com/Uploads/officer/dfbdd98c-e775-4790-b21b-640d2f906c59.png" alt="Logo">
-      </div>
-      <div class="title">Refund Detail</div>
-      <div class="info">
-        <div class="row"><span class="label">Refund ID</span><span>RF20251757317124009</span></div>
-        <div class="row"><span class="label">Original Transaction</span><span>PP20251757317124009</span></div>
-        <div class="row"><span class="label">Transaction Name</span><span>Refund MMQR Merchant</span></div>
-      		<div class="row"><span class="label">Refund Date</span><span>08/09/2025 15:20</span></div>
-        <div class="row"><span class="label">Refund Status</span><span>Refund Success</span></div>
-        <div class="row"><span class="label">Refunded From</span><span>Aumg Chan Thar</span></div>
-        <div class="row"><span class="label">Refunded To</span><span>Nyi Chay</span></div>
-        <div class="row"><span class="label">Refund Amount</span><span>5,206.51 MMK</span></div>
-        <div class="row"><span class="label">Remark</span><span>Refund of Test Payment RI</span></div>
-      </div>
-    </div>
-
+    <!-- Footer -->
+    <div class="footer"></div>
   </div>
 
   <script>
-    const btnPayment = document.getElementById("btnPayment");
-    const btnRefund = document.getElementById("btnRefund");
-    const paymentScreen = document.getElementById("paymentScreen");
-    const refundScreen = document.getElementById("refundScreen");
+    // Example dynamic values
+    const merchant = "MOMONEY MERCHANT";
+    const amount = "150,000.00";
 
-    btnPayment.onclick = () => {
-      paymentScreen.style.display = "block";
-      refundScreen.style.display = "none";
-      btnPayment.classList.remove("inactive");
-      btnRefund.classList.add("inactive");
-    };
-
-    btnRefund.onclick = () => {
-      paymentScreen.style.display = "none";
-      refundScreen.style.display = "block";
-      btnRefund.classList.remove("inactive");
-      btnPayment.classList.add("inactive");
-    };
+    document.getElementById("merchantName").innerText = merchant;
+    document.getElementById("amount").innerText = amount;
+    document.getElementById("qrCode").src =
+      `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${merchant}|${amount}`;
   </script>
-
 </body>
 </html>
