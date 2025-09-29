@@ -1,184 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MMQR Card</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MRTV Twitch Player</title>
   <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #f7f7f7;
+    html, body {
       margin: 0;
-      font-family: Arial;
-    }
-
-    .card {
-      position: relative;
-      width: 330px;
-      height: 478px;
-      background: #fff;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Header with logo + yellow line */
-    .header {
-      margin-top:5px;
+      padding: 0;
+      height: 100%;
       width: 100%;
-      height: 18.5%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
+      background: black;
+      overflow: hidden;
     }
-
-    .header::before {
-      content: "";
-      position: absolute;
-      top: 50%;
+    #player-container {
+      position: fixed;
+      top: 0;
       left: 0;
       width: 100%;
-      height: 8%;
-      background: #f2b600;
-      transform: translateY(-50%);
-      z-index: 0;
-    }
-
-    .logo {
-      position: relative;
-      z-index: 1;
       height: 100%;
     }
-
-    /* Content */
-    .main-content {
-      flex: 1;
+    iframe {
       width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 20%;        /* covers 20% of screen */
+      background: black; /* semi-transparent overlay */
+      color: white;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      margin-top: 25px;
-    }
-
-    /* Inner container same width as QR */
-    .info-container {
-      width: 65%; /* same width as QR */
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .receiver {
-      font-size: 20px;
-      font-weight:;
-      margin-bottom: 2px;
-    }
-
-    .amount-row {
-      display: flex;
-      align-items: baseline;
-    }
-
-    .amount {
-      font-size: 30px;
-      font-weight: ;
-      
-    }
-
-    .currency {
-      font-size: 20px;
-      margin-left: 5px;
-    }
-
-    /* Yellow dotted line full width */
-    .dotted-line {
-      margin: 1px 0;
-      width: 100%;
-      border-bottom: 2px dotted #f2b600;
-    }
-
-    /* MMQR label before QR */
-    .mmqr {
-      margin-top: 2px;
-      margin-bottom:2px;
-      font-size: 20px;
-      font-weight: semibold;
-      text-align: center;
-    }
-
-    /* QR Code centered */
-    .qr {
-      width: 65%;
-      aspect-ratio: 1 / 1;
-      display: flex;
       justify-content: center;
-      align-items: center;
-    }
-
-    .qr img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    /* Footer line */
-    .footer {
-      margin-top: auto;
-      width: 100%;
-      height: 2%;
-      background: #002c6f;
+      font-size: 1em;
+      font-family: Arial, sans-serif;
+      z-index: 2;        /* sits on top of player */
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <!-- Header -->
-    <div class="header">
-      <img class="logo" src="https://raw.githubusercontent.com/KaungHtetx/assets/refs/heads/main/IMG_20250923_050326.png" alt="MyanmarPay Logo">
-    </div>
+  <div id="player-container"></div>
 
-    <!-- Content -->
-    <div class="main-content">
-      <!-- Inner container -->
-      <div class="info-container">
-        <div class="receiver" id="merchantName">MoMoney Merchant</div>
-        <div class="amount-row">
-          <div class="amount" id="amount">150,000.00</div>
-          <div class="currency">MMK</div>
-        </div>
-      </div>
-
-      <!-- Yellow dotted line -->
-      <div class="dotted-line"></div>
-
-      <!-- MMQR label -->
-      <div class="mmqr">MMQR</div>
-
-      <!-- QR -->
-      <div class="qr">
-        <img id="qrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=MoMerchant|150000" alt="QR Code">
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer"></div>
+  <div class="top-bar">
+    MRTV Entertainment
   </div>
 
   <script>
-    // Example dynamic values
-    const merchant = "MOMONEY MERCHANT";
-    const amount = "150,000.00";
-
-    document.getElementById("merchantName").innerText = merchant;
-    document.getElementById("amount").innerText = amount;
-    document.getElementById("qrCode").src =
-      `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${merchant}|${amount}`;
+    const domain = window.location.hostname; // auto-detect domain
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://player.twitch.tv/?channel=mrtvmechannel&parent=${domain}`;
+    iframe.allowFullscreen = true;
+    iframe.setAttribute("allow", "fullscreen");
+    document.getElementById("player-container").appendChild(iframe);
   </script>
 </body>
 </html>
