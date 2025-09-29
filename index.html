@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>MRTV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MRTV Twitch Player</title>
   <style>
     html, body {
       margin: 0;
@@ -19,7 +19,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
     }
     iframe {
       width: 100%;
@@ -27,20 +26,19 @@
       border: none;
     }
     .top-bar {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 20%;       /* 20% of screen */
-      background: black; /* solid black cover */
-      z-index: 2;        /* covers the player */
+      height: 20%;        /* covers 20% of screen */
+      background: black; /* semi-transparent overlay */
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 1.5em;
+      font-size: 1em;
       font-family: Arial, sans-serif;
-      text-align: center;
+      z-index: 2;        /* sits on top of player */
     }
   </style>
 </head>
@@ -52,7 +50,7 @@
   </div>
 
   <script>
-    const domain = window.location.hostname; // auto-detect domain (works on localhost + prod)
+    const domain = window.location.hostname; // auto-detect domain
     const iframe = document.createElement("iframe");
     iframe.src = `https://player.twitch.tv/?channel=mrtvmechannel&parent=${domain}`;
     iframe.allowFullscreen = true;
