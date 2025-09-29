@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Force mobile-style viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>MRTV Twitch Player</title>
   <style>
     html, body {
@@ -13,32 +14,40 @@
       background: black;
       overflow: hidden;
     }
+
+    /* Force a "mobile-like" layout even on desktop */
+    body {
+      max-width: 480px;       /* typical mobile width */
+      margin: 0 auto;         /* center if on desktop */
+    }
+
     #player-container {
-      position: fixed;
-      top: 0;
-      left: 0;
+      position: relative;
       width: 100%;
-      height: 100%;
+      height: 100vh;          /* always full height of screen */
+      z-index: 1;
     }
     iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
+
     .top-bar {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 20%;        /* covers 20% of screen */
-      background: black; /* semi-transparent overlay */
-      color: white;
+      height: 20%;           /* 20% of screen */
+      background: black;     /* solid black cover */
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1em;
+      color: white;
+      font-size: 1.2em;
       font-family: Arial, sans-serif;
-      z-index: 2;        /* sits on top of player */
+      text-align: center;
     }
   </style>
 </head>
@@ -46,11 +55,11 @@
   <div id="player-container"></div>
 
   <div class="top-bar">
-    
+     MRTV
   </div>
 
   <script>
-    const domain = window.location.hostname; // auto-detect domain
+    const domain = window.location.hostname;
     const iframe = document.createElement("iframe");
     iframe.src = `https://player.twitch.tv/?channel=mrtvmechannel&parent=${domain}`;
     iframe.allowFullscreen = true;
