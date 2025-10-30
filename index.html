@@ -1,70 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Force mobile-style viewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>MRTV Twitch Player</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Methods</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      background: black;
-      overflow: hidden;
-    }
-
-    /* Force a "mobile-like" layout even on desktop */
     body {
-      max-width: 480px;       /* typical mobile width */
-      margin: 0 auto;         /* center if on desktop */
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background-color: #f6f8fa;
+      color: #24292f;
+      padding: 40px;
     }
-
-    #player-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;          /* always full height of screen */
-      z-index: 1;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .top-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 20%;           /* 20% of screen */
-      background: black;     /* solid black cover */
-      z-index: 2;
+    h1 {
+      font-size: 1.6em;
+      margin-bottom: 16px;
+      color: #0969da;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    th, td {
+      border-bottom: 1px solid #d8dee4;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #f6f8fa;
+      font-weight: 600;
+      color: #24292f;
+    }
+    tr:hover {
+      background-color: #f0f3f6;
+    }
+    .category-row {
+      background-color: #eaeef2;
+      font-weight: 700;
+      color: #0969da;
+    }
+    .logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      border-radius: 4px;
+      background-color: white;
+      border: 1px solid #d0d7de;
+    }
+    .note {
+      color: #57606a;
+      font-size: 12px;
+    }
+    button {
+      background-color: #238636;
       color: white;
-      font-size: 1.2em;
-      font-family: Arial, sans-serif;
-      text-align: center;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background-color: #2ea043;
+    }
+    .url {
+      color: #0969da;
+      text-decoration: underline;
+      word-break: break-all;
     }
   </style>
 </head>
 <body>
-  <div id="player-container"></div>
 
-  <div class="top-bar">
-     MRTV
-  </div>
+  <h1>
+    💳 Payment Methods
+    <button onclick="copyJSON()">Copy as JSON</button>
+  </h1>
+
+  <table id="paymentTable">
+    <tr class="category-row"><td colspan="5">1. Wallet</td></tr>
+    <tr>
+      <th>#</th>
+      <th>Provider</th>
+      <th>Logo</th>
+      <th>Logo URL</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>1.1</td>
+      <td>MoMoney</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s" class="logo" alt="MoMoney"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s</td>
+      <td class="note">Need Wallet Phone Number</td>
+    </tr>
+    <tr>
+      <td>1.2</td>
+      <td>WaveMoney</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s" class="logo" alt="WaveMoney"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.3</td>
+      <td>KBZ Pay</td>
+      <td><img src="https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4" class="logo" alt="KBZ Pay"></td>
+      <td class="url">https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.4</td>
+      <td>Citizen Pay</td>
+      <td><img src="https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png" class="logo" alt="Citizen Pay"></td>
+      <td class="url">https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.6</td>
+      <td>UAB Pay</td>
+      <td><img src="https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ" class="logo" alt="UAB Pay"></td>
+      <td class="url">https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ</td>
+      <td class="note">Require Wallet No</td>
+    </tr>
+    <tr>
+      <td>1.7</td>
+      <td>A Plus</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s" class="logo" alt="A Plus"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.8</td>
+      <td>CB Pay</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s" class="logo" alt="CB Pay"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>1.9</td>
+      <td>AYA Pay</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s" class="logo" alt="AYA Pay"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s</td>
+      <td></td>
+    </tr>
+
+    <tr class="category-row"><td colspan="5">2. Card</td></tr>
+    <tr>
+      <th>#</th>
+      <th>Provider</th>
+      <th>Logo</th>
+      <th>Logo URL</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>2.1</td>
+      <td>MPU Card</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s" class="logo" alt="MPU Card"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2.2</td>
+      <td>VISA / MASTER Card</td>
+      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s" class="logo" alt="VISA / MASTER Card"></td>
+      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s</td>
+      <td></td>
+    </tr>
+  </table>
 
   <script>
-    const domain = window.location.hostname;
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://player.twitch.tv/?channel=mrtvmechannel&parent=${domain}`;
-    iframe.allowFullscreen = true;
-    iframe.setAttribute("allow", "fullscreen");
-    document.getElementById("player-container").appendChild(iframe);
+    const data = [
+      { category: "Wallet", id: "1.1", provider: "MoMoney", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s", note: "Need Wallet Phone Number" },
+      { category: "Wallet", id: "1.2", provider: "WaveMoney", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s", note: "" },
+      { category: "Wallet", id: "1.3", provider: "KBZ Pay", logo: "https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4", note: "" },
+      { category: "Wallet", id: "1.4", provider: "Citizen Pay", logo: "https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png", note: "" },
+      { category: "Wallet", id: "1.6", provider: "UAB Pay", logo: "https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ", note: "Require Wallet No" },
+      { category: "Wallet", id: "1.7", provider: "A Plus", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s", note: "" },
+      { category: "Wallet", id: "1.8", provider: "CB Pay", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s", note: "" },
+      { category: "Wallet", id: "1.9", provider: "AYA Pay", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s", note: "" },
+      { category: "Card", id: "2.1", provider: "MPU Card", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s", note: "" },
+      { category: "Card", id: "2.2", provider: "VISA / MASTER Card", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s", note: "" }
+    ];
+
+    function copyJSON() {
+      const json = JSON.stringify(data, null, 2);
+      navigator.clipboard.writeText(json).then(() => {
+        alert("✅ Payment methods copied as JSON!");
+      });
+    }
   </script>
+
 </body>
 </html>
