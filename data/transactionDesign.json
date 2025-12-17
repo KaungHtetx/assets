@@ -1,1 +1,1162 @@
-{"createdAt":"2022-08-24T07:15:58.983Z","updatedAt":"2023-09-07T05:13:50.617Z","id":"6305d02e42c24b27d020eb71","code":"UV8234443","name":"Subscriber Transfer to Unlinked Bank Account","fullName":"Subscriber Transfer to Unlinked Bank Account","desc":"","channels":["mobile","web"],"related":["customer"],"action":"bankTrans","transType":"normal","isRefund":false,"billerService":"none","actionParams":{"billerId":"64ed6ce9749d77276a8bd4ad","billerName":"Transfer to unlinked bank account"},"status":1,"lockedBy":{},"activatedBy":{},"statusChangedAt":null,"createdBy":{"id":"623830805a66a0310abb33dd","name":"DUC LE","roles":["root","operationanager"]},"updatedBy":{"id":"5dc392c8195301738cd1e2bf","name":"Tus","roles":["root"]},"note":"","devGrp":0,"serviceToRefund":"","inputFields":{},"outputFields":[],"paymentResult":{"en":[{"name":"Transaction Name","value":"name","dataType":"text","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Transaction Code","value":"code","dataType":"text","isMapping":true,"isCopy":true,"needSecured":false},{"name":"Transaction Status","value":"status","dataType":"text","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Source Money","value":"MoMoney Wallet","dataType":"text","isMapping":false,"isCopy":false,"needSecured":false},{"name":"Time","value":"createdAt","dataType":"datetime","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Beneficiary Account","value":"refFields.BENEFICIARYACCOUNTNO","dataType":"text","isMapping":true,"isFormula":false,"isCopy":true,"needSecured":true},{"name":"Amount","value":"origAmount","dataType":"currency","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Fee","value":"fees.debitFee","dataType":"currency","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Total","value":"amount","dataType":"currency","isMapping":true,"isCopy":false,"needSecured":false}],"my":[{"name":"Transaction Name","value":"name","dataType":"text","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Transaction Code","value":"code","dataType":"text","isMapping":true,"isCopy":true,"needSecured":false},{"name":"Transaction Status","value":"status","dataType":"text","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Source Money","value":"MoMoney Wallet","dataType":"text","isMapping":false,"isCopy":false,"needSecured":false},{"name":"Time","value":"createdAt","dataType":"datetime","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Beneficiary Account","value":"refFields.BENEFICIARYACCOUNTNO","dataType":"text","isMapping":true,"isFormula":false,"isCopy":true,"needSecured":true},{"name":"Amount","value":"origAmount","dataType":"currency","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Fee","value":"fees.debitFee","dataType":"currency","isMapping":true,"isCopy":false,"needSecured":false},{"name":"Total","value":"amount","dataType":"currency","isMapping":true,"isCopy":false,"needSecured":false}]},"paymentPreview":{},"paymentShortResult":"","serviceTarget":"","actionPriority":"before","fieldBuilder":[{"order":1,"name":"SERVICEID","rule":"mapping","datatype":"string","variable":"SERVICEID","source":"parameters","query":""},{"order":2,"name":"DEVICEID","rule":"mapping","datatype":"string","variable":"DEVICEID","source":"parameters","query":""},{"order":3,"name":"AMOUNT","rule":"mapping","datatype":"float","variable":"AMOUNT","source":"parameters","query":""},{"order":4,"name":"CURRENCY","rule":"fixed","datatype":"string","variable":"","source":"MMK","query":""},{"order":5,"name":"SENDERCLIENT","rule":"mapping","datatype":"string","variable":"client","source":"user","query":""},{"order":6,"name":"MESSAGE","rule":"mapping","datatype":"string","variable":"MESSAGE","source":"parameters"},{"order":7,"name":"OFFERID","rule":"mapping","datatype":"string","variable":"offer","source":"user","query":""},{"order":8,"name":"SENDERPHONE","rule":"mapping","datatype":"string","variable":"phone","source":"user","query":""},{"order":9,"name":"SENDERID","rule":"query","datatype":"string","variable":"id","source":"senderUser","query":"queryPocketByPhone(SENDERPHONE, SENDERCLIENT, CURRENCY)"},{"order":10,"name":"USER_TYPE","rule":"mapping","datatype":"string","variable":"type","source":"user"},{"order":11,"name":"MessageType","rule":"fixed","datatype":"string","source":"FO"},{"order":12,"name":"BENEFICIARYACCOUNTNAME","rule":"mapping","datatype":"string","variable":"BENEFICIARYACCOUNTNAME","source":"parameters"},{"order":13,"name":"BENEFICIARYACCOUNTNO","rule":"mapping","datatype":"string","variable":"BENEFICIARYACCOUNTNO","source":"parameters"},{"order":14,"name":"SAVEBENEFICIARY","rule":"mapping","datatype":"string","variable":"SAVEBENEFICIARY","source":"parameters"},{"order":15,"name":"SERVICENAME","rule":"mapping","datatype":"string","variable":"name","source":"service"},{"order":16,"name":"FEE1","rule":"mapping","datatype":"float","variable":"FEE1","source":"parameters"},{"order":17,"name":"FEE2","rule":"mapping","datatype":"float","variable":"FEE2","source":"parameters"}],"actionResult":[{"order":1,"type":"queryDatabase","collection":"beneficiary","method":"createOrUpdate","condition":"transaction.outputMessage.TRANSBODY.SAVEBENEFICIARY==true","documents":[{"source":"transaction","name":"accountNo","variable":"outputMessage.TRANSBODY.BENEFICIARYACCOUNTNO","rule":"mapping","dataType":"string","order":1,"datatype":"string","objectName":"beneficiary"},{"source":"transaction","name":"accountName","variable":"outputMessage.TRANSBODY.BENEFICIARYACCOUNTNAME","rule":"mapping","dataType":"string","order":2,"datatype":"string","objectName":"beneficiary"},{"name":"user","variable":"outputMessage.TRANSBODY.USERID","rule":"mapping","dataType":"string","order":4,"source":"transaction","datatype":"string"},{"name":"createdBy","variable":"processedBy","rule":"mapping","dataType":"string","order":5,"datatype":"json","source":"transaction"},{"name":"client","variable":"client","rule":"mapping","dataType":"string","order":6,"datatype":"string","source":"transaction"},{"name":"name","variable":"serviceName","rule":"mapping","dataType":"string","order":7,"datatype":"string","source":"transaction"},{"name":"service","variable":"serviceId","rule":"mapping","dataType":"string","order":8,"datatype":"string","source":"transaction"},{"order":10,"name":"status","rule":"fixed","datatype":"string","source":"active"}],"queryCondition":{"and":[{"user":{"contains":"{{transaction.outputMessage.TRANSBODY.USERID}}"}},{"beneficiary.accountNo":{"contains":"{{transaction.outputMessage.TRANSBODY.BENEFICIARYACCOUNTNO}}"}}]},"group":{"operator":"and","rules":[{"condition":"contains","field":"user","data":"{{transaction.outputMessage.TRANSBODY.USERID}}"},{"condition":"contains","field":"beneficiary.accountNo","data":"{{transaction.outputMessage.TRANSBODY.BENEFICIARYACCOUNTNO}}"}]},"isRequired":false}],"webResult":"","typeResult":"none","category":"","amountFormula":{"senderAmount":"TOTALAMOUNT","receiverAmount":"AMOUNT"},"icon":null,"historyResult":[],"definition":{"createdAt":"2022-08-24T07:16:31.226Z","updatedAt":"2025-10-02T04:44:47.640Z","id":"6305d04f42c24b7c7f20eb75","code":"6305d02e42c24b27d020eb71","name":"Subscriber Transfer to Unlinked Bank Account","desc":"","glSteps":[{"amount":"TransAmount","desc":"Block e-money","debit":{"type":"productLevel","rule":"606e774b57c4063beb589902","target":"sender"},"credit":{"type":"glLevel","rule":"manual","target":"L100000217"},"isMultiComponents":false,"componentType":"fee"},{"amount":"TransOrigAmount","desc":"Release origin amount","debit":{"type":"glLevel","rule":"manual","target":"L100000217"},"credit":{"type":"glLevel","rule":"manual","target":"A100000201"},"isMultiComponents":false,"componentType":""},{"amount":"SystemDistribution","desc":"Release fee to system","debit":{"type":"glLevel","rule":"manual","target":"L100000217"},"credit":{"type":"glLevel","rule":"mapping","target":"FeeGlTarget"},"isMultiComponents":true,"componentType":"fee"}],"createdBy":{"id":"656573f1c47acb27a26247e4","name":"maikhinmoemoe.myat","roles":["root","dmin","perationupervisor"]},"updatedBy":null},"validation":[{"id":"6305d05f42c24bf87a20eb78","service":"6305d02e42c24b27d020eb71","validateFunc":"validateSenderIsUser","validateFields":"SENDERPHONE:SENDERCLIENT:USERID","order":1,"status":1,"errorCode":9051,"errorMsg":"Sender is invalid"},{"id":"6305d05f42c24b4a1420eb79","service":"6305d02e42c24b27d020eb71","validateFunc":"validateServiceInOffer","validateFields":"OFFERID:SERVICEID","order":2,"status":1,"errorCode":9053,"errorMsg":"Can not access to service"},{"id":"6305d05f42c24be77c20eb7a","service":"6305d02e42c24b27d020eb71","validateFunc":"validateSenderPocketBalance","validateFields":"SENDERID","order":3,"status":1,"errorCode":9054,"errorMsg":"Sender pocket locked"},{"id":"6305d05f42c24b2ee220eb7b","service":"6305d02e42c24b27d020eb71","validateFunc":"validateSenderAccountSufficiency","validateFields":"SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:CURRENCY","order":4,"status":1,"errorCode":9061,"errorMsg":"Sender balance not sufficiency"},{"id":"6305d05f42c24b1b8d20eb7c","service":"6305d02e42c24b27d020eb71","validateFunc":"validateCurrency","validateFields":"CURRENCY","order":5,"status":1,"errorCode":9079,"errorMsg":"Currency is not valid"},{"id":"6305d05f42c24b930b20eb7d","service":"6305d02e42c24b27d020eb71","validateFunc":"validateIntervalLimit","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","order":6,"status":1,"errorCode":9063,"errorMsg":"Transaction too frequently"},{"id":"6305d05f42c24b5b0c20eb7e","service":"6305d02e42c24b27d020eb71","validateFunc":"validateDailyLimitUser","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","order":7,"status":1,"errorCode":9063,"errorMsg":"Amount exceeded daily limit"},{"id":"6305d05f42c24b4c9c20eb7f","service":"6305d02e42c24b27d020eb71","validateFunc":"validateMonthlyLimitUser","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","order":8,"status":1,"errorCode":9064,"errorMsg":"Amount exceeded monthly limit"},{"id":"6305d05f42c24b26b920eb80","service":"6305d02e42c24b27d020eb71","validateFunc":"validateWeeklyLimitUser","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","order":9,"status":1,"errorCode":9065,"errorMsg":"Amount exceeded weekly limit"},{"id":"6305d05f42c24b31a120eb81","service":"6305d02e42c24b27d020eb71","validateFunc":"validateTransactionMaxAmount","validateFields":"OFFERID:SERVICEID:AMOUNT:CURRENCY","order":10,"status":1,"errorCode":9060,"errorMsg":"Amount too big"},{"id":"6305d05f42c24b00d320eb82","service":"6305d02e42c24b27d020eb71","validateFunc":"validateTransactionMinAmount","validateFields":"OFFERID:SERVICEID:AMOUNT:CURRENCY","order":11,"status":1,"errorCode":9059,"errorMsg":"Amount too small"}],"field":[{"id":"64f92f6862a85fe52e194be6","service":"6305d02e42c24b27d020eb71","fieldName":"SENDERID","order":5,"fieldFormat":"string","minLength":24,"maxLength":24,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9003,"errorMsg":"Wrong SenderId format"},{"id":"64f92f6862a85fd12b194bf0","service":"6305d02e42c24b27d020eb71","fieldName":"FEE1","order":15,"fieldFormat":"float","minLength":1,"maxLength":10,"regex":"","needSecured":false,"isRequired":false,"status":1,"errorCode":9007,"errorMsg":"Wrong Fee1 format"},{"id":"64f92f6862a85f87a6194be3","service":"6305d02e42c24b27d020eb71","fieldName":"CURRENCY","order":2,"fieldFormat":"string","minLength":3,"maxLength":3,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9012,"errorMsg":"Wrong Currency format"},{"id":"64f92f6862a85f742e194bf1","service":"6305d02e42c24b27d020eb71","fieldName":"FEE2","order":16,"fieldFormat":"float","minLength":1,"maxLength":10,"regex":"","needSecured":false,"isRequired":false,"status":1,"errorCode":9007,"errorMsg":"Wrong Fee2 format"},{"id":"64f92f6862a85f6ebf194bee","service":"6305d02e42c24b27d020eb71","fieldName":"MessageType","order":13,"fieldFormat":"string","minLength":2,"maxLength":5,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9007,"errorMsg":"Wong MessageType"},{"id":"64f92f6862a85f665e194be5","service":"6305d02e42c24b27d020eb71","fieldName":"AMOUNT","order":4,"fieldFormat":"integer","minLength":2,"maxLength":10,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9011,"errorMsg":"Wrong Amount format"},{"id":"64f92f6862a85f51b4194beb","service":"6305d02e42c24b27d020eb71","fieldName":"SERVICEID","order":10,"fieldFormat":"string","minLength":24,"maxLength":24,"regex":"^([0-9]|[a-z])*$","needSecured":false,"isRequired":true,"status":1,"errorCode":9022,"errorMsg":"Wrong Service Id Format"},{"id":"64f92f6862a85f3ccf194be2","service":"6305d02e42c24b27d020eb71","fieldName":"SENDERPHONE","order":1,"fieldFormat":"string","minLength":10,"maxLength":11,"regex":"^(09)([0-9]{8,9})$","needSecured":false,"isRequired":true,"status":1,"errorCode":9004,"errorMsg":"Wrong Sender Phone format"},{"id":"64f92f6862a85f3c87194bed","service":"6305d02e42c24b27d020eb71","fieldName":"USER_TYPE","order":12,"fieldFormat":"string","minLength":1,"maxLength":10,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9006,"errorMsg":"Wong user type format"},{"id":"64f92f6862a85f38fc194be9","service":"6305d02e42c24b27d020eb71","fieldName":"OFFERID","order":8,"fieldFormat":"string","minLength":24,"maxLength":24,"regex":"^([0-9]|[a-z])*$","needSecured":false,"isRequired":true,"status":1,"errorCode":9002,"errorMsg":"Wrong Offer Id format"},{"id":"64f92f6862a85f3565194bef","service":"6305d02e42c24b27d020eb71","fieldName":"SERVICENAME","order":14,"fieldFormat":"string","minLength":1,"maxLength":256,"regex":"","needSecured":false,"isRequired":false,"status":1,"errorCode":9007,"errorMsg":"Wrong Service Name format"},{"id":"64f92f6862a85f2d93194be7","service":"6305d02e42c24b27d020eb71","fieldName":"BENEFICIARYACCOUNTNAME","order":6,"fieldFormat":"string","minLength":2,"maxLength":100,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9035,"errorMsg":"Wrong Bank Account Name format"},{"id":"64f92f6862a85f2bda194be8","service":"6305d02e42c24b27d020eb71","fieldName":"BENEFICIARYACCOUNTNO","order":7,"fieldFormat":"string","minLength":1,"maxLength":20,"regex":"^[0-9]*$","needSecured":true,"isRequired":false,"status":1,"errorCode":9026,"errorMsg":"Wrong Bank Account Number format"},{"id":"64f92f6862a85f1b5e194be4","service":"6305d02e42c24b27d020eb71","fieldName":"DEVICEID","order":3,"fieldFormat":"string","minLength":1,"maxLength":256,"regex":"","needSecured":false,"isRequired":true,"status":1,"errorCode":9017,"errorMsg":"Wrong DeviceId format"},{"id":"64f92f6862a85f16d0194bec","service":"6305d02e42c24b27d020eb71","fieldName":"SAVEBENEFICIARY","order":11,"fieldFormat":"boolean","minLength":4,"maxLength":4,"regex":"","needSecured":false,"isRequired":false,"status":1,"errorCode":9115,"errorMsg":"Wrong Auto Save"},{"id":"64f92f6862a85f03ee194bea","service":"6305d02e42c24b27d020eb71","fieldName":"SENDERCLIENT","order":9,"fieldFormat":"string","minLength":3,"maxLength":10,"regex":"^(customer)$","needSecured":false,"isRequired":true,"status":1,"errorCode":9005,"errorMsg":"Wrong Sender Client format"}],"currentVersion":{"createdAt":"2022-08-24T07:15:58.983Z","updatedAt":"2025-10-02T04:44:47.613Z","id":"6305d02f42c24b50e320eb73","service":"6305d02e42c24b27d020eb71","version":1,"transDefinition":[{"amount":"TransAmount","desc":"Block e-money","debit":{"type":"productLevel","rule":"606e774b57c4063beb589902","target":"sender"},"credit":{"type":"glLevel","rule":"manual","target":"L100000217"},"isMultiComponents":false,"componentType":"fee"},{"amount":"TransOrigAmount","desc":"Release origin amount","debit":{"type":"glLevel","rule":"manual","target":"L100000217"},"credit":{"type":"glLevel","rule":"manual","target":"A100000201"},"isMultiComponents":false,"componentType":""},{"amount":"SystemDistribution","desc":"Release fee to system","debit":{"type":"glLevel","rule":"manual","target":"L100000217"},"credit":{"type":"glLevel","rule":"mapping","target":"FeeGlTarget"},"isMultiComponents":true,"componentType":"fee"}],"transField":[{"service":"6305d02e42c24b27d020eb71","fieldName":"SENDERPHONE","fieldFormat":"string","minLength":10,"maxLength":11,"regex":"^(09)([0-9]{8,9})$","status":1,"errorCode":9004,"errorMsg":"Wrong Sender Phone format","isRequired":true,"needSecured":false,"order":1},{"service":"6305d02e42c24b27d020eb71","fieldName":"CURRENCY","fieldFormat":"string","minLength":3,"maxLength":3,"regex":"","status":1,"errorCode":9012,"errorMsg":"Wrong Currency format","isRequired":true,"needSecured":false,"order":2},{"service":"6305d02e42c24b27d020eb71","fieldName":"DEVICEID","fieldFormat":"string","minLength":1,"maxLength":256,"regex":"","status":1,"errorCode":9017,"errorMsg":"Wrong DeviceId format","isRequired":true,"needSecured":false,"order":3},{"service":"6305d02e42c24b27d020eb71","fieldName":"AMOUNT","fieldFormat":"integer","minLength":2,"maxLength":10,"regex":"","status":1,"errorCode":9011,"errorMsg":"Wrong Amount format","isRequired":true,"needSecured":false,"order":4},{"service":"6305d02e42c24b27d020eb71","fieldName":"SENDERID","fieldFormat":"string","minLength":24,"maxLength":24,"regex":"","status":1,"errorCode":9003,"errorMsg":"Wrong SenderId format","isRequired":true,"needSecured":false,"order":5},{"service":"6305d02e42c24b27d020eb71","fieldName":"BENEFICIARYACCOUNTNAME","fieldFormat":"string","minLength":2,"maxLength":100,"regex":"","status":1,"errorCode":9035,"errorMsg":"Wrong Bank Account Name format","isRequired":true,"needSecured":false,"order":6},{"service":"6305d02e42c24b27d020eb71","fieldName":"BENEFICIARYACCOUNTNO","fieldFormat":"string","minLength":1,"maxLength":20,"regex":"^[0-9]*$","status":1,"errorCode":9026,"errorMsg":"Wrong Bank Account Number format","isRequired":0,"needSecured":true,"order":7},{"service":"6305d02e42c24b27d020eb71","fieldName":"OFFERID","fieldFormat":"string","minLength":24,"maxLength":24,"regex":"^([0-9]|[a-z])*$","status":1,"errorCode":9002,"errorMsg":"Wrong Offer Id format","isRequired":true,"needSecured":false,"order":8},{"service":"6305d02e42c24b27d020eb71","fieldName":"SENDERCLIENT","fieldFormat":"string","minLength":3,"maxLength":10,"regex":"^(customer)$","status":1,"errorCode":9005,"errorMsg":"Wrong Sender Client format","isRequired":true,"needSecured":false,"order":9},{"service":"6305d02e42c24b27d020eb71","fieldName":"SERVICEID","fieldFormat":"string","minLength":24,"maxLength":24,"regex":"^([0-9]|[a-z])*$","status":1,"errorCode":9022,"errorMsg":"Wrong Service Id Format","isRequired":true,"needSecured":false,"order":10},{"service":"6305d02e42c24b27d020eb71","fieldName":"SAVEBENEFICIARY","fieldFormat":"boolean","minLength":4,"maxLength":4,"regex":"","status":1,"errorCode":9115,"errorMsg":"Wrong Auto Save","isRequired":0,"needSecured":false,"order":11},{"service":"6305d02e42c24b27d020eb71","fieldName":"USER_TYPE","fieldFormat":"string","minLength":"1","maxLength":"10","status":1,"errorCode":9006,"errorMsg":"Wong user type format","isRequired":true,"needSecured":false,"order":12},{"service":"6305d02e42c24b27d020eb71","fieldName":"MessageType","fieldFormat":"string","minLength":2,"maxLength":5,"regex":"","status":1,"errorCode":9007,"errorMsg":"Wong MessageType","isRequired":true,"needSecured":false,"order":13},{"service":"6305d02e42c24b27d020eb71","fieldName":"SERVICENAME","fieldFormat":"string","minLength":"1","maxLength":"256","status":1,"errorCode":9007,"errorMsg":"Wrong Service Name format","isRequired":0,"needSecured":false,"order":14},{"service":"6305d02e42c24b27d020eb71","fieldName":"FEE1","fieldFormat":"float","minLength":"1","maxLength":"10","status":1,"errorCode":9007,"errorMsg":"Wrong Fee1 format","isRequired":0,"needSecured":false,"order":15},{"service":"6305d02e42c24b27d020eb71","fieldName":"FEE2","fieldFormat":"float","minLength":"1","maxLength":"10","status":1,"errorCode":9007,"errorMsg":"Wrong Fee2 format","isRequired":0,"needSecured":false,"order":16}],"transValidation":[{"service":"6305d02e42c24b27d020eb71","order":1,"validateFunc":"validateSenderIsUser","validateFields":"SENDERPHONE:SENDERCLIENT:USERID","errorCode":9051,"errorMsg":"Sender is invalid","status":1},{"service":"6305d02e42c24b27d020eb71","order":2,"validateFunc":"validateServiceInOffer","validateFields":"OFFERID:SERVICEID","errorCode":9053,"errorMsg":"Can not access to service","status":1},{"service":"6305d02e42c24b27d020eb71","order":3,"validateFunc":"validateSenderPocketBalance","validateFields":"SENDERID","errorCode":9054,"errorMsg":"Sender pocket locked","status":1},{"service":"6305d02e42c24b27d020eb71","order":4,"validateFunc":"validateSenderAccountSufficiency","validateFields":"SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:CURRENCY","errorCode":9061,"errorMsg":"Sender balance not sufficiency","status":1},{"service":"6305d02e42c24b27d020eb71","order":5,"validateFunc":"validateCurrency","validateFields":"CURRENCY","errorCode":9079,"errorMsg":"Currency is not valid","status":1},{"service":"6305d02e42c24b27d020eb71","order":6,"validateFunc":"validateIntervalLimit","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","errorCode":9063,"errorMsg":"Transaction too frequently","status":1},{"service":"6305d02e42c24b27d020eb71","order":7,"validateFunc":"validateDailyLimitUser","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","errorCode":9063,"errorMsg":"Amount exceeded daily limit","status":1},{"service":"6305d02e42c24b27d020eb71","order":8,"validateFunc":"validateMonthlyLimitUser","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","errorCode":9064,"errorMsg":"Amount exceeded monthly limit","status":1},{"service":"6305d02e42c24b27d020eb71","order":9,"validateFunc":"validateWeeklyLimitUser","validateFields":"USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY","errorCode":9065,"errorMsg":"Amount exceeded weekly limit","status":1},{"service":"6305d02e42c24b27d020eb71","order":10,"validateFunc":"validateTransactionMaxAmount","validateFields":"OFFERID:SERVICEID:AMOUNT:CURRENCY","errorCode":9060,"errorMsg":"Amount too big","status":1},{"service":"6305d02e42c24b27d020eb71","order":11,"validateFunc":"validateTransactionMinAmount","validateFields":"OFFERID:SERVICEID:AMOUNT:CURRENCY","errorCode":9059,"errorMsg":"Amount too small","status":1}],"desc":"","isUsing":true,"status":"active","fieldBuilder":[{"order":1,"name":"SERVICEID","rule":"mapping","datatype":"string","variable":"SERVICEID","source":"parameters","query":""},{"order":2,"name":"DEVICEID","rule":"mapping","datatype":"string","variable":"DEVICEID","source":"parameters","query":""},{"order":3,"name":"AMOUNT","rule":"mapping","datatype":"float","variable":"AMOUNT","source":"parameters","query":""},{"order":4,"name":"CURRENCY","rule":"fixed","datatype":"string","variable":"","source":"MMK","query":""},{"order":5,"name":"SENDERCLIENT","rule":"mapping","datatype":"string","variable":"client","source":"user","query":""},{"order":6,"name":"MESSAGE","rule":"mapping","datatype":"string","variable":"MESSAGE","source":"parameters"},{"order":7,"name":"OFFERID","rule":"mapping","datatype":"string","variable":"offer","source":"user","query":""},{"order":8,"name":"SENDERPHONE","rule":"mapping","datatype":"string","variable":"phone","source":"user","query":""},{"order":9,"name":"SENDERID","rule":"query","datatype":"string","variable":"id","source":"senderUser","query":"queryPocketByPhone(SENDERPHONE, SENDERCLIENT, CURRENCY)"},{"order":10,"name":"USER_TYPE","rule":"mapping","datatype":"string","variable":"type","source":"user"},{"order":11,"name":"MessageType","rule":"fixed","datatype":"string","source":"FO"},{"order":12,"name":"BENEFICIARYACCOUNTNAME","rule":"mapping","datatype":"string","variable":"BENEFICIARYACCOUNTNAME","source":"parameters"},{"order":13,"name":"BENEFICIARYACCOUNTNO","rule":"mapping","datatype":"string","variable":"BENEFICIARYACCOUNTNO","source":"parameters"},{"order":14,"name":"SAVEBENEFICIARY","rule":"mapping","datatype":"string","variable":"SAVEBENEFICIARY","source":"parameters"},{"order":15,"name":"SERVICENAME","rule":"mapping","datatype":"string","variable":"name","source":"service"},{"order":16,"name":"FEE1","rule":"mapping","datatype":"float","variable":"FEE1","source":"parameters"},{"order":17,"name":"FEE2","rule":"mapping","datatype":"float","variable":"FEE2","source":"parameters"}],"actionResult":[],"createdBy":{"id":"623830805a66a0310abb33dd","name":"DUC LE","roles":["root","operationanager"]},"updatedBy":{"id":"656573f1c47acb27a26247e4","name":"maikhinmoemoe.myat","roles":["root","dmin","perationupervisor"]}}}
+{
+	"createdAt": "2022-08-24T07:15:58.983Z",
+	"updatedAt": "2023-09-07T05:13:50.617Z",
+	"id": "6305d02e42c24b27d020eb71",
+	"code": "UV8234443",
+	"name": "Subscriber Transfer to Unlinked Bank Account",
+	"fullName": "Subscriber Transfer to Unlinked Bank Account",
+	"desc": "",
+	"channels": [
+		"mobile",
+		"web"
+	],
+	"related": [
+		"customer"
+	],
+	"action": "bankTrans",
+	"transType": "normal",
+	"isRefund": false,
+	"billerService": "none",
+	"actionParams": {
+		"billerId": "64ed6ce9749d77276a8bd4ad",
+		"billerName": "Transfer to unlinked bank account"
+	},
+	"status": 1,
+	"lockedBy": {},
+	"activatedBy": {},
+	"statusChangedAt": null,
+	"createdBy": {
+		"id": "623830805a66a0310abb33dd",
+		"name": "DUC LE",
+		"roles": [
+			"root",
+			"operationanager"
+		]
+	},
+	"updatedBy": {
+		"id": "5dc392c8195301738cd1e2bf",
+		"name": "Tus",
+		"roles": [
+			"root"
+		]
+	},
+	"note": "",
+	"devGrp": 0,
+	"serviceToRefund": "",
+	"inputFields": {},
+	"outputFields": [],
+	"paymentResult": {
+		"en": [
+			{
+				"name": "Transaction Name",
+				"value": "name",
+				"dataType": "text",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Transaction Code",
+				"value": "code",
+				"dataType": "text",
+				"isMapping": true,
+				"isCopy": true,
+				"needSecured": false
+			},
+			{
+				"name": "Transaction Status",
+				"value": "status",
+				"dataType": "text",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Source Money",
+				"value": "MoMoney Wallet",
+				"dataType": "text",
+				"isMapping": false,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Time",
+				"value": "createdAt",
+				"dataType": "datetime",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Beneficiary Account",
+				"value": "refFields.BENEFICIARYACCOUNTNO",
+				"dataType": "text",
+				"isMapping": true,
+				"isFormula": false,
+				"isCopy": true,
+				"needSecured": true
+			},
+			{
+				"name": "Amount",
+				"value": "origAmount",
+				"dataType": "currency",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Fee",
+				"value": "fees.debitFee",
+				"dataType": "currency",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Total",
+				"value": "amount",
+				"dataType": "currency",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			}
+		],
+		"my": [
+			{
+				"name": "Transaction Name",
+				"value": "name",
+				"dataType": "text",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Transaction Code",
+				"value": "code",
+				"dataType": "text",
+				"isMapping": true,
+				"isCopy": true,
+				"needSecured": false
+			},
+			{
+				"name": "Transaction Status",
+				"value": "status",
+				"dataType": "text",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Source Money",
+				"value": "MoMoney Wallet",
+				"dataType": "text",
+				"isMapping": false,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Time",
+				"value": "createdAt",
+				"dataType": "datetime",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Beneficiary Account",
+				"value": "refFields.BENEFICIARYACCOUNTNO",
+				"dataType": "text",
+				"isMapping": true,
+				"isFormula": false,
+				"isCopy": true,
+				"needSecured": true
+			},
+			{
+				"name": "Amount",
+				"value": "origAmount",
+				"dataType": "currency",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Fee",
+				"value": "fees.debitFee",
+				"dataType": "currency",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			},
+			{
+				"name": "Total",
+				"value": "amount",
+				"dataType": "currency",
+				"isMapping": true,
+				"isCopy": false,
+				"needSecured": false
+			}
+		]
+	},
+	"paymentPreview": {},
+	"paymentShortResult": "",
+	"serviceTarget": "",
+	"actionPriority": "before",
+	"fieldBuilder": [
+		{
+			"order": 1,
+			"name": "SERVICEID",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "SERVICEID",
+			"source": "parameters",
+			"query": ""
+		},
+		{
+			"order": 2,
+			"name": "DEVICEID",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "DEVICEID",
+			"source": "parameters",
+			"query": ""
+		},
+		{
+			"order": 3,
+			"name": "AMOUNT",
+			"rule": "mapping",
+			"datatype": "float",
+			"variable": "AMOUNT",
+			"source": "parameters",
+			"query": ""
+		},
+		{
+			"order": 4,
+			"name": "CURRENCY",
+			"rule": "fixed",
+			"datatype": "string",
+			"variable": "",
+			"source": "MMK",
+			"query": ""
+		},
+		{
+			"order": 5,
+			"name": "SENDERCLIENT",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "client",
+			"source": "user",
+			"query": ""
+		},
+		{
+			"order": 6,
+			"name": "MESSAGE",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "MESSAGE",
+			"source": "parameters"
+		},
+		{
+			"order": 7,
+			"name": "OFFERID",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "offer",
+			"source": "user",
+			"query": ""
+		},
+		{
+			"order": 8,
+			"name": "SENDERPHONE",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "phone",
+			"source": "user",
+			"query": ""
+		},
+		{
+			"order": 9,
+			"name": "SENDERID",
+			"rule": "query",
+			"datatype": "string",
+			"variable": "id",
+			"source": "senderUser",
+			"query": "queryPocketByPhone(SENDERPHONE, SENDERCLIENT, CURRENCY)"
+		},
+		{
+			"order": 10,
+			"name": "USER_TYPE",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "type",
+			"source": "user"
+		},
+		{
+			"order": 11,
+			"name": "MessageType",
+			"rule": "fixed",
+			"datatype": "string",
+			"source": "FO"
+		},
+		{
+			"order": 12,
+			"name": "BENEFICIARYACCOUNTNAME",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "BENEFICIARYACCOUNTNAME",
+			"source": "parameters"
+		},
+		{
+			"order": 13,
+			"name": "BENEFICIARYACCOUNTNO",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "BENEFICIARYACCOUNTNO",
+			"source": "parameters"
+		},
+		{
+			"order": 14,
+			"name": "SAVEBENEFICIARY",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "SAVEBENEFICIARY",
+			"source": "parameters"
+		},
+		{
+			"order": 15,
+			"name": "SERVICENAME",
+			"rule": "mapping",
+			"datatype": "string",
+			"variable": "name",
+			"source": "service"
+		},
+		{
+			"order": 16,
+			"name": "FEE1",
+			"rule": "mapping",
+			"datatype": "float",
+			"variable": "FEE1",
+			"source": "parameters"
+		},
+		{
+			"order": 17,
+			"name": "FEE2",
+			"rule": "mapping",
+			"datatype": "float",
+			"variable": "FEE2",
+			"source": "parameters"
+		}
+	],
+	"actionResult": [
+		{
+			"order": 1,
+			"type": "queryDatabase",
+			"collection": "beneficiary",
+			"method": "createOrUpdate",
+			"condition": "transaction.outputMessage.TRANSBODY.SAVEBENEFICIARY==true",
+			"documents": [
+				{
+					"source": "transaction",
+					"name": "accountNo",
+					"variable": "outputMessage.TRANSBODY.BENEFICIARYACCOUNTNO",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 1,
+					"datatype": "string",
+					"objectName": "beneficiary"
+				},
+				{
+					"source": "transaction",
+					"name": "accountName",
+					"variable": "outputMessage.TRANSBODY.BENEFICIARYACCOUNTNAME",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 2,
+					"datatype": "string",
+					"objectName": "beneficiary"
+				},
+				{
+					"name": "user",
+					"variable": "outputMessage.TRANSBODY.USERID",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 4,
+					"source": "transaction",
+					"datatype": "string"
+				},
+				{
+					"name": "createdBy",
+					"variable": "processedBy",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 5,
+					"datatype": "json",
+					"source": "transaction"
+				},
+				{
+					"name": "client",
+					"variable": "client",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 6,
+					"datatype": "string",
+					"source": "transaction"
+				},
+				{
+					"name": "name",
+					"variable": "serviceName",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 7,
+					"datatype": "string",
+					"source": "transaction"
+				},
+				{
+					"name": "service",
+					"variable": "serviceId",
+					"rule": "mapping",
+					"dataType": "string",
+					"order": 8,
+					"datatype": "string",
+					"source": "transaction"
+				},
+				{
+					"order": 10,
+					"name": "status",
+					"rule": "fixed",
+					"datatype": "string",
+					"source": "active"
+				}
+			],
+			"queryCondition": {
+				"and": [
+					{
+						"user": {
+							"contains": "{{transaction.outputMessage.TRANSBODY.USERID}}"
+						}
+					},
+					{
+						"beneficiary.accountNo": {
+							"contains": "{{transaction.outputMessage.TRANSBODY.BENEFICIARYACCOUNTNO}}"
+						}
+					}
+				]
+			},
+			"group": {
+				"operator": "and",
+				"rules": [
+					{
+						"condition": "contains",
+						"field": "user",
+						"data": "{{transaction.outputMessage.TRANSBODY.USERID}}"
+					},
+					{
+						"condition": "contains",
+						"field": "beneficiary.accountNo",
+						"data": "{{transaction.outputMessage.TRANSBODY.BENEFICIARYACCOUNTNO}}"
+					}
+				]
+			},
+			"isRequired": false
+		}
+	],
+	"webResult": "",
+	"typeResult": "none",
+	"category": "",
+	"amountFormula": {
+		"senderAmount": "TOTALAMOUNT",
+		"receiverAmount": "AMOUNT"
+	},
+	"icon": null,
+	"historyResult": [],
+	"definition": {
+		"createdAt": "2022-08-24T07:16:31.226Z",
+		"updatedAt": "2025-10-02T04:44:47.640Z",
+		"id": "6305d04f42c24b7c7f20eb75",
+		"code": "6305d02e42c24b27d020eb71",
+		"name": "Subscriber Transfer to Unlinked Bank Account",
+		"desc": "",
+		"glSteps": [
+			{
+				"amount": "TransAmount",
+				"desc": "Block e-money",
+				"debit": {
+					"type": "productLevel",
+					"rule": "606e774b57c4063beb589902",
+					"target": "sender"
+				},
+				"credit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "L100000217"
+				},
+				"isMultiComponents": false,
+				"componentType": "fee"
+			},
+			{
+				"amount": "TransOrigAmount",
+				"desc": "Release origin amount",
+				"debit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "L100000217"
+				},
+				"credit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "A100000201"
+				},
+				"isMultiComponents": false,
+				"componentType": ""
+			},
+			{
+				"amount": "SystemDistribution",
+				"desc": "Release fee to system",
+				"debit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "L100000217"
+				},
+				"credit": {
+					"type": "glLevel",
+					"rule": "mapping",
+					"target": "FeeGlTarget"
+				},
+				"isMultiComponents": true,
+				"componentType": "fee"
+			}
+		],
+		"createdBy": {
+			"id": "656573f1c47acb27a26247e4",
+			"name": "maikhinmoemoe.myat",
+			"roles": [
+				"root",
+				"dmin",
+				"perationupervisor"
+			]
+		},
+		"updatedBy": null
+	},
+	"validation": [
+		{
+			"id": "6305d05f42c24bf87a20eb78",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateSenderIsUser",
+			"validateFields": "SENDERPHONE:SENDERCLIENT:USERID",
+			"order": 1,
+			"status": 1,
+			"errorCode": 9051,
+			"errorMsg": "Sender is invalid"
+		},
+		{
+			"id": "6305d05f42c24b4a1420eb79",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateServiceInOffer",
+			"validateFields": "OFFERID:SERVICEID",
+			"order": 2,
+			"status": 1,
+			"errorCode": 9053,
+			"errorMsg": "Can not access to service"
+		},
+		{
+			"id": "6305d05f42c24be77c20eb7a",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateSenderPocketBalance",
+			"validateFields": "SENDERID",
+			"order": 3,
+			"status": 1,
+			"errorCode": 9054,
+			"errorMsg": "Sender pocket locked"
+		},
+		{
+			"id": "6305d05f42c24b2ee220eb7b",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateSenderAccountSufficiency",
+			"validateFields": "SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:CURRENCY",
+			"order": 4,
+			"status": 1,
+			"errorCode": 9061,
+			"errorMsg": "Sender balance not sufficiency"
+		},
+		{
+			"id": "6305d05f42c24b1b8d20eb7c",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateCurrency",
+			"validateFields": "CURRENCY",
+			"order": 5,
+			"status": 1,
+			"errorCode": 9079,
+			"errorMsg": "Currency is not valid"
+		},
+		{
+			"id": "6305d05f42c24b930b20eb7d",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateIntervalLimit",
+			"validateFields": "USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY",
+			"order": 6,
+			"status": 1,
+			"errorCode": 9063,
+			"errorMsg": "Transaction too frequently"
+		},
+		{
+			"id": "6305d05f42c24b5b0c20eb7e",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateDailyLimitUser",
+			"validateFields": "USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY",
+			"order": 7,
+			"status": 1,
+			"errorCode": 9063,
+			"errorMsg": "Amount exceeded daily limit"
+		},
+		{
+			"id": "6305d05f42c24b4c9c20eb7f",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateMonthlyLimitUser",
+			"validateFields": "USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY",
+			"order": 8,
+			"status": 1,
+			"errorCode": 9064,
+			"errorMsg": "Amount exceeded monthly limit"
+		},
+		{
+			"id": "6305d05f42c24b26b920eb80",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateWeeklyLimitUser",
+			"validateFields": "USERID:SENDERPHONE:SENDERCLIENT:SENDERID:AMOUNT:DEBITFEE:OFFERID:SERVICEID:CURRENCY",
+			"order": 9,
+			"status": 1,
+			"errorCode": 9065,
+			"errorMsg": "Amount exceeded weekly limit"
+		},
+		{
+			"id": "6305d05f42c24b31a120eb81",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateTransactionMaxAmount",
+			"validateFields": "OFFERID:SERVICEID:AMOUNT:CURRENCY",
+			"order": 10,
+			"status": 1,
+			"errorCode": 9060,
+			"errorMsg": "Amount too big"
+		},
+		{
+			"id": "6305d05f42c24b00d320eb82",
+			"service": "6305d02e42c24b27d020eb71",
+			"validateFunc": "validateTransactionMinAmount",
+			"validateFields": "OFFERID:SERVICEID:AMOUNT:CURRENCY",
+			"order": 11,
+			"status": 1,
+			"errorCode": 9059,
+			"errorMsg": "Amount too small"
+		}
+	],
+	"field": [
+		{
+			"id": "64f92f6862a85fe52e194be6",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "SENDERID",
+			"order": 5,
+			"fieldFormat": "string",
+			"minLength": 24,
+			"maxLength": 24,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9003,
+			"errorMsg": "Wrong SenderId format"
+		},
+		{
+			"id": "64f92f6862a85fd12b194bf0",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "FEE1",
+			"order": 15,
+			"fieldFormat": "float",
+			"minLength": 1,
+			"maxLength": 10,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": false,
+			"status": 1,
+			"errorCode": 9007,
+			"errorMsg": "Wrong Fee1 format"
+		},
+		{
+			"id": "64f92f6862a85f87a6194be3",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "CURRENCY",
+			"order": 2,
+			"fieldFormat": "string",
+			"minLength": 3,
+			"maxLength": 3,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9012,
+			"errorMsg": "Wrong Currency format"
+		},
+		{
+			"id": "64f92f6862a85f742e194bf1",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "FEE2",
+			"order": 16,
+			"fieldFormat": "float",
+			"minLength": 1,
+			"maxLength": 10,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": false,
+			"status": 1,
+			"errorCode": 9007,
+			"errorMsg": "Wrong Fee2 format"
+		},
+		{
+			"id": "64f92f6862a85f6ebf194bee",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "MessageType",
+			"order": 13,
+			"fieldFormat": "string",
+			"minLength": 2,
+			"maxLength": 5,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9007,
+			"errorMsg": "Wong MessageType"
+		},
+		{
+			"id": "64f92f6862a85f665e194be5",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "AMOUNT",
+			"order": 4,
+			"fieldFormat": "integer",
+			"minLength": 2,
+			"maxLength": 10,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9011,
+			"errorMsg": "Wrong Amount format"
+		},
+		{
+			"id": "64f92f6862a85f51b4194beb",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "SERVICEID",
+			"order": 10,
+			"fieldFormat": "string",
+			"minLength": 24,
+			"maxLength": 24,
+			"regex": "^([0-9]|[a-z])*$",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9022,
+			"errorMsg": "Wrong Service Id Format"
+		},
+		{
+			"id": "64f92f6862a85f3ccf194be2",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "SENDERPHONE",
+			"order": 1,
+			"fieldFormat": "string",
+			"minLength": 10,
+			"maxLength": 11,
+			"regex": "^(09)([0-9]{8,9})$",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9004,
+			"errorMsg": "Wrong Sender Phone format"
+		},
+		{
+			"id": "64f92f6862a85f3c87194bed",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "USER_TYPE",
+			"order": 12,
+			"fieldFormat": "string",
+			"minLength": 1,
+			"maxLength": 10,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9006,
+			"errorMsg": "Wong user type format"
+		},
+		{
+			"id": "64f92f6862a85f38fc194be9",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "OFFERID",
+			"order": 8,
+			"fieldFormat": "string",
+			"minLength": 24,
+			"maxLength": 24,
+			"regex": "^([0-9]|[a-z])*$",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9002,
+			"errorMsg": "Wrong Offer Id format"
+		},
+		{
+			"id": "64f92f6862a85f3565194bef",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "SERVICENAME",
+			"order": 14,
+			"fieldFormat": "string",
+			"minLength": 1,
+			"maxLength": 256,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": false,
+			"status": 1,
+			"errorCode": 9007,
+			"errorMsg": "Wrong Service Name format"
+		},
+		{
+			"id": "64f92f6862a85f2d93194be7",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "BENEFICIARYACCOUNTNAME",
+			"order": 6,
+			"fieldFormat": "string",
+			"minLength": 2,
+			"maxLength": 100,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9035,
+			"errorMsg": "Wrong Bank Account Name format"
+		},
+		{
+			"id": "64f92f6862a85f2bda194be8",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "BENEFICIARYACCOUNTNO",
+			"order": 7,
+			"fieldFormat": "string",
+			"minLength": 1,
+			"maxLength": 20,
+			"regex": "^[0-9]*$",
+			"needSecured": true,
+			"isRequired": false,
+			"status": 1,
+			"errorCode": 9026,
+			"errorMsg": "Wrong Bank Account Number format"
+		},
+		{
+			"id": "64f92f6862a85f1b5e194be4",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "DEVICEID",
+			"order": 3,
+			"fieldFormat": "string",
+			"minLength": 1,
+			"maxLength": 256,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9017,
+			"errorMsg": "Wrong DeviceId format"
+		},
+		{
+			"id": "64f92f6862a85f16d0194bec",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "SAVEBENEFICIARY",
+			"order": 11,
+			"fieldFormat": "boolean",
+			"minLength": 4,
+			"maxLength": 4,
+			"regex": "",
+			"needSecured": false,
+			"isRequired": false,
+			"status": 1,
+			"errorCode": 9115,
+			"errorMsg": "Wrong Auto Save"
+		},
+		{
+			"id": "64f92f6862a85f03ee194bea",
+			"service": "6305d02e42c24b27d020eb71",
+			"fieldName": "SENDERCLIENT",
+			"order": 9,
+			"fieldFormat": "string",
+			"minLength": 3,
+			"maxLength": 10,
+			"regex": "^(customer)$",
+			"needSecured": false,
+			"isRequired": true,
+			"status": 1,
+			"errorCode": 9005,
+			"errorMsg": "Wrong Sender Client format"
+		}
+	],
+	"currentVersion": {
+		"createdAt": "2022-08-24T07:15:58.983Z",
+		"updatedAt": "2025-10-02T04:44:47.613Z",
+		"id": "6305d02f42c24b50e320eb73",
+		"service": "6305d02e42c24b27d020eb71",
+		"version": 1,
+		"transDefinition": [
+			{
+				"amount": "TransAmount",
+				"desc": "Block e-money",
+				"debit": {
+					"type": "productLevel",
+					"rule": "606e774b57c4063beb589902",
+					"target": "sender"
+				},
+				"credit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "L100000217"
+				},
+				"isMultiComponents": false,
+				"componentType": "fee"
+			},
+			{
+				"amount": "TransOrigAmount",
+				"desc": "Release origin amount",
+				"debit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "L100000217"
+				},
+				"credit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "A100000201"
+				},
+				"isMultiComponents": false,
+				"componentType": ""
+			},
+			{
+				"amount": "SystemDistribution",
+				"desc": "Release fee to system",
+				"debit": {
+					"type": "glLevel",
+					"rule": "manual",
+					"target": "L100000217"
+				},
+				"credit": {
+					"type": "glLevel",
+					"rule": "mapping",
+					"target": "FeeGlTarget"
+				},
+				"isMultiComponents": true,
+				"componentType": "fee"
+			}
+		],
+		"transField": [
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "SENDERPHONE",
+				"fieldFormat": "string",
+				"minLength": 10,
+				"maxLength": 11,
+				"regex": "^(09)([0-9]{8,9})$",
+				"status": 1,
+				"errorCode": 9004,
+				"errorMsg": "Wrong Sender Phone format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 1
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "CURRENCY",
+				"fieldFormat": "string",
+				"minLength": 3,
+				"maxLength": 3,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9012,
+				"errorMsg": "Wrong Currency format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 2
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "DEVICEID",
+				"fieldFormat": "string",
+				"minLength": 1,
+				"maxLength": 256,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9017,
+				"errorMsg": "Wrong DeviceId format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 3
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "AMOUNT",
+				"fieldFormat": "integer",
+				"minLength": 2,
+				"maxLength": 10,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9011,
+				"errorMsg": "Wrong Amount format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 4
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "SENDERID",
+				"fieldFormat": "string",
+				"minLength": 24,
+				"maxLength": 24,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9003,
+				"errorMsg": "Wrong SenderId format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 5
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "BENEFICIARYACCOUNTNAME",
+				"fieldFormat": "string",
+				"minLength": 2,
+				"maxLength": 100,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9035,
+				"errorMsg": "Wrong Bank Account Name format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 6
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "BENEFICIARYACCOUNTNO",
+				"fieldFormat": "string",
+				"minLength": 1,
+				"maxLength": 20,
+				"regex": "^[0-9]*$",
+				"status": 1,
+				"errorCode": 9026,
+				"errorMsg": "Wrong Bank Account Number format",
+				"isRequired": 0,
+				"needSecured": true,
+				"order": 7
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "OFFERID",
+				"fieldFormat": "string",
+				"minLength": 24,
+				"maxLength": 24,
+				"regex": "^([0-9]|[a-z])*$",
+				"status": 1,
+				"errorCode": 9002,
+				"errorMsg": "Wrong Offer Id format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 8
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "SENDERCLIENT",
+				"fieldFormat": "string",
+				"minLength": 3,
+				"maxLength": 10,
+				"regex": "^(customer)$",
+				"status": 1,
+				"errorCode": 9005,
+				"errorMsg": "Wrong Sender Client format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 9
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "SERVICEID",
+				"fieldFormat": "string",
+				"minLength": 24,
+				"maxLength": 24,
+				"regex": "^([0-9]|[a-z])*$",
+				"status": 1,
+				"errorCode": 9022,
+				"errorMsg": "Wrong Service Id Format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 10
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "SAVEBENEFICIARY",
+				"fieldFormat": "boolean",
+				"minLength": 4,
+				"maxLength": 4,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9115,
+				"errorMsg": "Wrong Auto Save",
+				"isRequired": 0,
+				"needSecured": false,
+				"order": 11
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "USER_TYPE",
+				"fieldFormat": "string",
+				"minLength": "1",
+				"maxLength": "10",
+				"status": 1,
+				"errorCode": 9006,
+				"errorMsg": "Wong user type format",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 12
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "MessageType",
+				"fieldFormat": "string",
+				"minLength": 2,
+				"maxLength": 5,
+				"regex": "",
+				"status": 1,
+				"errorCode": 9007,
+				"errorMsg": "Wong MessageType",
+				"isRequired": true,
+				"needSecured": false,
+				"order": 13
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "SERVICENAME",
+				"fieldFormat": "string",
+				"minLength": "1",
+				"maxLength": "256",
+				"status": 1,
+				"errorCode": 9007,
+				"errorMsg": "Wrong Service Name format",
+				"isRequired": 0,
+				"needSecured": false,
+				"order": 14
+			},
+			{
+				"service": "6305d02e42c24b27d020eb71",
+				"fieldName": "FEE1",
+				"fieldFormat": "float",
+				"minLength": "1",
+				"maxLength": "10",
+				"status": 1,
+				"errorCode": 9007,
+				"errorMsg": "Wrong Fee1 format",
+				"isRequired": 0,
+				"needSecured": false,
+				"order": 15
+			},
+			{
+				"service": "6305d02e42c24"
+			}
+		]
+	}
+    }
