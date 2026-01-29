@@ -1,202 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Methods</title>
-  <style>
-    body {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background-color: #f6f8fa;
-      color: #24292f;
-      padding: 40px;
-    }
-    h1 {
-      font-size: 1.6em;
-      margin-bottom: 16px;
-      color: #0969da;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-      background: #fff;
-      border: 1px solid #d0d7de;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    th, td {
-      border-bottom: 1px solid #d8dee4;
-      padding: 8px 10px;
-      text-align: left;
-      vertical-align: middle;
-    }
-    th {
-      background-color: #f6f8fa;
-      font-weight: 600;
-      color: #24292f;
-    }
-    tr:hover {
-      background-color: #f0f3f6;
-    }
-    .category-row {
-      background-color: #eaeef2;
-      font-weight: 700;
-      color: #0969da;
-    }
-    .logo {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
-      border-radius: 4px;
-      background-color: white;
-      border: 1px solid #d0d7de;
-    }
-    .note {
-      color: #57606a;
-      font-size: 12px;
-    }
-    button {
-      background-color: #238636;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background-color: #2ea043;
-    }
-    .url {
-      color: #0969da;
-      text-decoration: underline;
-      word-break: break-all;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Methods</title>
+<style>
+  body {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+    background:#f6f8fa;
+    padding:40px;
+  }
+  table {
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid #d0d7de;
+  }
+  th, td {
+    padding:8px 10px;
+    border-bottom:1px solid #d8dee4;
+    text-align:left;
+    vertical-align:middle;
+  }
+  th {
+    background:#f6f8fa;
+  }
+  .category-row {
+    background:#eaeef2;
+    font-weight:700;
+    color:#0969da;
+  }
+  .logo {
+    width:38px;
+    height:38px;
+    object-fit:contain;
+    border:1px solid #d0d7de;
+    background:#fff;
+    border-radius:4px;
+  }
+  .note {
+    font-size:12px;
+    color:#57606a;
+  }
+  .url {
+    color:#0969da;
+    text-decoration:underline;
+    word-break:break-all;
+  }
+  .buttons {
+    margin-bottom: 20px;
+  }
+  .buttons button {
+    margin-right: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
 
-  <h1>
-    💳 Payment Methods
-    <button onclick="copyJSON()">Copy as JSON</button>
-  </h1>
+<h2>💳 Payment Methods</h2>
 
-  <table id="paymentTable">
-    <tr class="category-row"><td colspan="5">1. Wallet</td></tr>
-    <tr>
-      <th>#</th>
-      <th>Provider</th>
-      <th>Logo</th>
-      <th>Logo URL</th>
-      <th>Notes</th>
-    </tr>
-    <tr>
-      <td>1.1</td>
-      <td>MoMoney</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s" class="logo" alt="MoMoney"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s</td>
-      <td class="note">Need Wallet Phone Number</td>
-    </tr>
-    <tr>
-      <td>1.2</td>
-      <td>WaveMoney</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s" class="logo" alt="WaveMoney"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>1.3</td>
-      <td>KBZ Pay</td>
-      <td><img src="https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4" class="logo" alt="KBZ Pay"></td>
-      <td class="url">https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>1.4</td>
-      <td>Citizen Pay</td>
-      <td><img src="https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png" class="logo" alt="Citizen Pay"></td>
-      <td class="url">https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>1.6</td>
-      <td>UAB Pay</td>
-      <td><img src="https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ" class="logo" alt="UAB Pay"></td>
-      <td class="url">https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ</td>
-      <td class="note">Require Wallet No</td>
-    </tr>
-    <tr>
-      <td>1.7</td>
-      <td>A Plus</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s" class="logo" alt="A Plus"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>1.8</td>
-      <td>CB Pay</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s" class="logo" alt="CB Pay"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>1.9</td>
-      <td>AYA Pay</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s" class="logo" alt="AYA Pay"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s</td>
-      <td></td>
-    </tr>
+<div class="buttons">
+  <button onclick="copyTableAsJSON()">📋 Copy JSON</button>
+  <button onclick="downloadTableAsJSON()">💾 Download JSON</button>
+</div>
 
-    <tr class="category-row"><td colspan="5">2. Card</td></tr>
-    <tr>
-      <th>#</th>
-      <th>Provider</th>
-      <th>Logo</th>
-      <th>Logo URL</th>
-      <th>Notes</th>
-    </tr>
-    <tr>
-      <td>2.1</td>
-      <td>MPU Card</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s" class="logo" alt="MPU Card"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>2.2</td>
-      <td>VISA / MASTER Card</td>
-      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s" class="logo" alt="VISA / MASTER Card"></td>
-      <td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s</td>
-      <td></td>
-    </tr>
-  </table>
+<table id="paymentTable">
+  <!-- ================= MMQR ================= -->
+  <tr class="category-row"><td colspan="5">1. MMQR</td></tr>
+  <tr>
+    <th>#</th><th>Provider</th><th>Logo</th><th>Logo URL</th><th>Notes</th>
+  </tr>
+  <tr>
+    <td>1.0</td>
+    <td><strong>MMQR (Main)</strong></td>
+    <td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/logo_512.png" alt="MMQR"></td>
+    <td class="url">https://myanmarpay.com.mm/frontend/assets/images/logo_512.png</td>
+    <td class="note">National QR – supports multiple wallets</td>
+  </tr>
+  <tr><td>1.1</td><td>MMQR – A+ Wallet</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/A+-Wallet.png" alt="A+ Wallet"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/A+-Wallet.png</td><td></td></tr>
+  <tr><td>1.2</td><td>MMQR – UAB Pay</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/uabpay.png" alt="UAB Pay"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/uabpay.png</td><td></td></tr>
+  <tr><td>1.3</td><td>MMQR – CB</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/CB.png" alt="CB"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/CB.png</td><td></td></tr>
+  <tr><td>1.4</td><td>MMQR – AYA Pay</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/AYA-PAYs.png" alt="AYA Pay"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/AYA-PAYs.png</td><td></td></tr>
+  <tr><td>1.5</td><td>MMQR – OK Dollar</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/OK-Dollor.png" alt="OK Dollar"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/OK-Dollor.png</td><td></td></tr>
+  <tr><td>1.6</td><td>MMQR – Waves</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/Waves.png" alt="Waves"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/Waves.png</td><td></td></tr>
+  <tr><td>1.7</td><td>MMQR – KBZ Pay</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/KBZ-Pays.png" alt="KBZ Pay"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/KBZ-Pays.png</td><td></td></tr>
+  <tr><td>1.8</td><td>MMQR – M-PiteSan</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/M-PiteSan.png" alt="M-PiteSan"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/M-PiteSan.png</td><td></td></tr>
+  <tr><td>1.9</td><td>MMQR – ZegoMoney</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/ZegoMoney.png" alt="ZegoMoney"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/ZegoMoney.png</td><td></td></tr>
+  <tr><td>1.10</td><td>MMQR – Yoma Pay</td><td><img class="logo" src="https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/Yoma-Logo.png" alt="Yoma Pay"></td><td class="url">https://myanmarpay.com.mm/frontend/assets/images/Bank%20Logo/Yoma-Logo.png</td><td></td></tr>
 
-  <script>
-    const data = [
-      { category: "Wallet", id: "1.1", provider: "MoMoney", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s", note: "Need Wallet Phone Number" },
-      { category: "Wallet", id: "1.2", provider: "WaveMoney", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s", note: "" },
-      { category: "Wallet", id: "1.3", provider: "KBZ Pay", logo: "https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4", note: "" },
-      { category: "Wallet", id: "1.4", provider: "Citizen Pay", logo: "https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png", note: "" },
-      { category: "Wallet", id: "1.6", provider: "UAB Pay", logo: "https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ", note: "Require Wallet No" },
-      { category: "Wallet", id: "1.7", provider: "A Plus", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s", note: "" },
-      { category: "Wallet", id: "1.8", provider: "CB Pay", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s", note: "" },
-      { category: "Wallet", id: "1.9", provider: "AYA Pay", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s", note: "" },
-      { category: "Card", id: "2.1", provider: "MPU Card", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s", note: "" },
-      { category: "Card", id: "2.2", provider: "VISA / MASTER Card", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s", note: "" }
-    ];
+  <!-- ================= Other Wallets ================= -->
+  <tr class="category-row"><td colspan="5">2. Other Wallets</td></tr>
+  <tr>
+    <th>#</th><th>Provider</th><th>Logo</th><th>Logo URL</th><th>Notes</th>
+  </tr>
+  <tr><td>2.1</td><td>MoMoney</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s" alt="MoMoney"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzFDC0Bbj4DJhYry6z4S0pQtUWR2Z8SNFwA&s</td><td class="note">Need Wallet Phone Number</td></tr>
+  <tr><td>2.2</td><td>WaveMoney</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s" alt="WaveMoney"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXKSekjQq5pKDUvP_nnyk-iBHLiSXXGT0kcw&s</td><td></td></tr>
+  <tr><td>2.3</td><td>KBZ Pay</td><td><img class="logo" src="https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4" alt="KBZ Pay"></td><td class="url">https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4</td><td></td></tr>
+  <tr><td>2.4</td><td>Citizen Pay</td><td><img class="logo" src="https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png" alt="Citizen Pay"></td><td class="url">https://ctzpay.com/wp-content/uploads/2024/10/CTZPay-logo.png</td><td></td></tr>
+  <tr><td>2.5</td><td>UAB Pay</td><td><img class="logo" src="https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ" alt="UAB Pay"></td><td class="url">https://play-lh.googleusercontent.com/j1ZiQVB8jFi2sZslkh1vN419gvRIN5VGif6749zljhWldRjmC7_dOF_y1jcuq3rwnQ</td><td class="note">Require Wallet No</td></tr>
+  <tr><td>2.6</td><td>A Plus</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s" alt="A Plus"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_HdKtolk6Hy43Bng_kbdY9cxZ33ZqiNtTlg&s</td><td></td></tr>
+  <tr><td>2.7</td><td>CB Pay</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s" alt="CB Pay"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpsBOmiKKeBwXW4em_3enqgRLXXCqo4O3qw&s</td><td></td></tr>
+  <tr><td>2.8</td><td>AYA Pay</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s" alt="AYA Pay"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0yz7j-fGrH6neCGBaGN4T4fxuDC0ylHnMsA&s</td><td></td></tr>
 
-    function copyJSON() {
-      const json = JSON.stringify(data, null, 2);
-      navigator.clipboard.writeText(json).then(() => {
-        alert("✅ Payment methods copied as JSON!");
-      });
+  <!-- ================= Card ================= -->
+  <tr class="category-row"><td colspan="5">3. Card</td></tr>
+  <tr>
+    <th>#</th><th>Provider</th><th>Logo</th><th>Logo URL</th><th>Notes</th>
+  </tr>
+  <tr><td>3.1</td><td>MPU Card</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s" alt="MPU Card"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi2eNS2TMihkyUVYNlcGNppWyrg6L8fJ49ZQ&s</td><td></td></tr>
+  <tr><td>3.2</td><td>VISA / Master</td><td><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s" alt="VISA / Master"></td><td class="url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwjIsNXsmbG22WNlqQNxW66mdxWute_jd6sg&s</td><td></td></tr>
+
+</table>
+
+<script>
+function getTableDataAsJSON() {
+  const table = document.getElementById("paymentTable");
+  const data = [];
+  let currentCategory = "";
+
+  for (let row of table.rows) {
+    if (row.classList.contains("category-row")) {
+      currentCategory = row.cells[0].innerText.trim();
+    } else if (row.cells.length === 5 && row.querySelector("th") === null) {
+      // Normal data row
+      const item = {
+        category: currentCategory,
+        number: row.cells[0].innerText.trim(),
+        provider: row.cells[1].innerText.trim(),
+        logoURL: row.cells[3].innerText.trim(),
+        notes: row.cells[4].innerText.trim()
+      };
+      data.push(item);
     }
-  </script>
+  }
+  return data;
+}
+
+function copyTableAsJSON() {
+  const jsonData = getTableDataAsJSON();
+  navigator.clipboard.writeText(JSON.stringify(jsonData, null, 2))
+    .then(() => alert("✅ Table copied as JSON!"))
+    .catch(err => alert("❌ Failed to copy JSON: " + err));
+}
+
+function downloadTableAsJSON() {
+  const jsonData = getTableDataAsJSON();
+  const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "payment_methods.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
 
 </body>
 </html>
